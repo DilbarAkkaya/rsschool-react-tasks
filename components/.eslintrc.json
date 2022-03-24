@@ -26,10 +26,6 @@
         "react-hooks"
     ],
     "rules": {
-        "@typescript-eslint/parser": ["off", {
-            "failOnError": true,
-            "emitWarning": true
-        }],
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
       "comma-dangle": ["error", "only-multiline"],
