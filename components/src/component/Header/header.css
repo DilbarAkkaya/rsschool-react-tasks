@@ -1,0 +1,17 @@
+
+header {
+  background-color: #282c34;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+header > a {
+  list-style-type: none;
+  color: white;
+  text-decoration: none;
+  padding: 0 1rem;
+}
+
+.active {
+  color: blue;
+}
