@@ -1,0 +1,17 @@
+.search-panel{
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 25px;
+  background-color: #3d5a80;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.search-input {
+  width: 100%;
+  border-radius: 6px;
+  color: #3d5a80;
+  font-size: 18px;
+  border-color: #19afaf;
+}

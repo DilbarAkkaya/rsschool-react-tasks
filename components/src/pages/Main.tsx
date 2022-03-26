@@ -1,8 +1,16 @@
 import React from 'react';
+import SearchPanel from '../component/Search/SearchPanel';
 
 class Main extends React.Component {
   render() {
-    return <h1>Main Page</h1>;
+    return (
+      <div>
+        <h1>Main Page</h1>
+        <div className="search-panel">
+          <SearchPanel />
+        </div>
+      </div>
+    );
   }
 }
 
