@@ -7,10 +7,12 @@ class Main extends React.Component {
   render() {
     // const {cards} = props;
     return (
-      <div>
+      <div className="main">
         <h1>Main Page</h1>
         <div className="search-panel">
           <SearchPanel />
+        </div>
+        <div className="card-block">
           {data.map((item) => (
             <Card
               key={item.num}

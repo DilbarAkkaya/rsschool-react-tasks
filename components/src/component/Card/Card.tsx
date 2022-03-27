@@ -1,5 +1,6 @@
 import React from 'react';
 import IDataOfToys from '../../types';
+import './card.css';
 
 class Card extends React.Component<IDataOfToys> {
   constructor(props: IDataOfToys) {
@@ -7,7 +8,7 @@ class Card extends React.Component<IDataOfToys> {
   }
   render() {
     return (
-      <div>
+      <div className="card">
         <h2 className="card-title">{this.props.name}</h2>
         <img src="./assets/toys/{this.props.num}.png" alt="toy" className="card-img" />
         <div className="card-descr">
