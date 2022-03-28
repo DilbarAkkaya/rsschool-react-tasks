@@ -8,7 +8,7 @@ class Card extends React.Component<IDataOfToys> {
   }
   render() {
     return (
-      <div className="card">
+      <div className="card" data-testid="card">
         <h2 className="card-title">{this.props.name}</h2>
         <img
           src={require(`../../assets/toys/${this.props.num}.png`)}

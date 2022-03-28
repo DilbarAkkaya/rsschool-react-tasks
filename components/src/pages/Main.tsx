@@ -12,7 +12,7 @@ class Main extends React.Component {
         <div className="search-panel">
           <SearchPanel />
         </div>
-        <div className="card-block">
+        <div className="card-block" id="card-block">
           {data.map((item) => (
             <Card
               key={item.num}
