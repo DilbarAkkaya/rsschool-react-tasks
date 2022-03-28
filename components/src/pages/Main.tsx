@@ -16,6 +16,7 @@ class Main extends React.Component {
           {data.map((item) => (
             <Card
               key={item.num}
+              num={item.num}
               name={item.name}
               count={item.count}
               year={item.year}

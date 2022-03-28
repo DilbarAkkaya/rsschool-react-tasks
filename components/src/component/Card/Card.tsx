@@ -10,7 +10,11 @@ class Card extends React.Component<IDataOfToys> {
     return (
       <div className="card">
         <h2 className="card-title">{this.props.name}</h2>
-        <img src="./assets/toys/{this.props.num}.png" alt="toy" className="card-img" />
+        <img
+          src={require(`../../assets/toys/${this.props.num}.png`)}
+          alt="toy"
+          className="card-img"
+        />
         <div className="card-descr">
           <p className="count">
             Количество: <span>{this.props.count}</span>
