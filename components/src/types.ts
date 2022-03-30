@@ -9,4 +9,7 @@ export interface IDataOfToys {
   favorite: boolean
 }
 
+export interface IStorage {
+  [key: string] : string }
+
 export default IDataOfToys;

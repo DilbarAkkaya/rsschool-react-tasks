@@ -1,8 +1,6 @@
 import { saveToStorage } from './storage';
+import { IStorage } from '../../types';
 
-interface IStorage {
-  [key: string] : string
-}
 const fakeLocalStorage = (function () {
   let store: IStorage = {};
 
