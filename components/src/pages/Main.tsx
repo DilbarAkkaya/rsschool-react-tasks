@@ -5,7 +5,6 @@ import data from '../data';
 
 class Main extends React.Component {
   render() {
-    // const {cards} = props;
     return (
       <div className="main">
         <h1>Main Page</h1>
