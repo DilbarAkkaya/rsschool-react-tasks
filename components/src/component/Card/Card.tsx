@@ -32,7 +32,7 @@ class Card extends React.Component<IDataOfToys> {
             Размер: <span>{this.props.size}</span>
           </p>
           <p className="favorite">
-            Любимая: <span>{this.props.favorite === true ? 'Да' : 'Нет'}</span>
+            Любимая: <span>{this.props.favorite ? 'Да' : 'Нет'}</span>
           </p>
         </div>
       </div>
