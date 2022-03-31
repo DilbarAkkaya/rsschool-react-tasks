@@ -4,12 +4,9 @@ import { Routes, Route } from 'react-router-dom';
 import Main from './pages/Main';
 import AboutUs from './pages/AboutUs';
 import NotFound from './pages/404';
+import { PATH_MAIN, PATH_404, PATH_ABOUT, PATH_OTHER } from './constants/constants';
 
 function App() {
-  const PATH_MAIN = '/',
-    PATH_ABOUT = '/aboutus',
-    PATH_404 = '404',
-    PATH_OTHER = '*';
   return (
     <div className="App">
       <Header />
