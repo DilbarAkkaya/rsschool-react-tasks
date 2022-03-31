@@ -13,17 +13,7 @@ class Main extends React.Component {
         </div>
         <div className="card-block" id="card-block">
           {data.map((item) => (
-            <Card
-              key={item.num}
-              num={item.num}
-              name={item.name}
-              count={item.count}
-              year={item.year}
-              shape={item.shape}
-              color={item.color}
-              size={item.size}
-              favorite={item.favorite}
-            />
+            <Card key={item.num} {...item}></Card>
           ))}
         </div>
       </div>
