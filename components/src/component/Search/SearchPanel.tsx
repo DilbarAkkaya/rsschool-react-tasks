@@ -34,7 +34,7 @@ class SearchPanel extends React.Component<MyProps, MyState> {
         className="search-input"
         placeholder="Search..."
         value={this.state.value}
-        onChange={(event) => this.handleChange(event)}
+        onChange={this.handleChange}
       />
     );
   }
