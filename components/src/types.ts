@@ -18,5 +18,5 @@ export type MyProps = { value?: string };
 export type MyState = { value: string };
 export type FormProps = {
   name: string,
-  salary: number
+  date: Date,
 }
