@@ -1,8 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import './search.css';
-
-type MyProps = { value?: string };
-type MyState = { value: string };
+import { MyState, MyProps } from '../../types';
 
 class SearchPanel extends React.Component<MyProps, MyState> {
   constructor(props: MyProps) {
