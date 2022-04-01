@@ -72,46 +72,6 @@ class Form extends React.Component {
       </form>
     );
   }
-  /*     this.state = {
-      name: '',
-      date: new Date(),
-    };
-  } */
-
-  /*  onValueChange = (e: ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  }; */
-
-  /* 
-
-  render() {
-    return (
-      <div className="card">
-        <h2>Add new employer</h2>
-        <form className="form">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Enter employer's name"
-            name="name"
-            onChange={this.onValueChange}
-          ></input>
-          <input
-            type="date"
-            className="form-control"
-            placeholder="Enter employer's birhtday"
-            name="date"
-            onChange={this.onValueChange}
-          ></input>
-          <button type="submit" className="">
-            Submit
-          </button>
-        </form>
-      </div>
-    );
-  }
-} */
 }
+
 export default Form;
