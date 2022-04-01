@@ -4,15 +4,22 @@ import { FormProps } from '../../types';
 class Form extends React.Component {
   inputName: React.RefObject<HTMLInputElement>;
   inputDate: React.RefObject<HTMLInputElement>;
+  selectPosition: React.RefObject<HTMLSelectElement>;
   constructor(props: FormProps) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.inputName = React.createRef();
     this.inputDate = React.createRef();
+    this.selectPosition = React.createRef();
   }
 
   handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
-    alert('Inpormation' + this.inputName.current?.value + this.inputDate.current?.value);
+    console.log(
+      'INFO ' +
+        this.inputName.current?.value +
+        this.inputDate.current?.value +
+        this.selectPosition.current?.value
+    );
     event.preventDefault();
   }
 
@@ -21,12 +28,22 @@ class Form extends React.Component {
       <form onSubmit={this.handleSubmit} className="card-block">
         <label>
           Employer name:
-          <input type="text" ref={this.inputName} />
+          <input type="text" ref={this.inputName} defaultValue="name" />
         </label>
         <label>
           Empolyer birthday:
-          <input type="date" ref={this.inputDate} />
+          <input type="date" ref={this.inputDate} defaultValue="birthday" />
         </label>
+        <label>Choose a position:</label>
+        <select ref={this.selectPosition} name="position" id="position" defaultValue="">
+          <option value="" disabled>
+            Frontend
+          </option>
+          <option value="frontend">Frontend</option>
+          <option value="backend">Backend</option>
+          <option value="fullstack">Fullstack</option>
+          <option value="analist">Analist</option>
+        </select>
         <input type="submit" value="Submit" />
       </form>
     );

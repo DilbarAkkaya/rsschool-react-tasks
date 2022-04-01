@@ -19,4 +19,5 @@ export type MyState = { value: string };
 export type FormProps = {
   name: string,
   date: Date,
+  position: string,
 }
