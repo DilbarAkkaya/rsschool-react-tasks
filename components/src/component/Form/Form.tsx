@@ -5,12 +5,14 @@ class Form extends React.Component {
   inputName: React.RefObject<HTMLInputElement>;
   inputDate: React.RefObject<HTMLInputElement>;
   selectPosition: React.RefObject<HTMLSelectElement>;
+  checkboxMarried: React.RefObject<HTMLInputElement>;
   constructor(props: FormProps) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.inputName = React.createRef();
     this.inputDate = React.createRef();
     this.selectPosition = React.createRef();
+    this.checkboxMarried = React.createRef();
   }
 
   handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
@@ -18,20 +20,21 @@ class Form extends React.Component {
       'INFO ' +
         this.inputName.current?.value +
         this.inputDate.current?.value +
-        this.selectPosition.current?.value
+        this.selectPosition.current?.value +
+        this.checkboxMarried.current?.checked
     );
     event.preventDefault();
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="card-block">
+      <form onSubmit={this.handleSubmit} className="form-wrapper">
         <label>
-          Employer name:
+          Name of employer:
           <input type="text" ref={this.inputName} defaultValue="name" />
         </label>
         <label>
-          Empolyer birthday:
+          Date of birthday:
           <input type="date" ref={this.inputDate} defaultValue="birthday" />
         </label>
         <label>Choose a position:</label>
@@ -44,6 +47,10 @@ class Form extends React.Component {
           <option value="fullstack">Fullstack</option>
           <option value="analist">Analist</option>
         </select>
+        <label>
+          Married:
+          <input type="checkbox" ref={this.checkboxMarried} name="married" defaultChecked />
+        </label>
         <input type="submit" value="Submit" />
       </form>
     );
