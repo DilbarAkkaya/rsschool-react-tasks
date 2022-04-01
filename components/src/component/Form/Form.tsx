@@ -6,6 +6,8 @@ class Form extends React.Component {
   inputDate: React.RefObject<HTMLInputElement>;
   selectPosition: React.RefObject<HTMLSelectElement>;
   checkboxMarried: React.RefObject<HTMLInputElement>;
+  radioMan: React.RefObject<HTMLInputElement>;
+  radioWoman: React.RefObject<HTMLInputElement>;
   constructor(props: FormProps) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -13,6 +15,8 @@ class Form extends React.Component {
     this.inputDate = React.createRef();
     this.selectPosition = React.createRef();
     this.checkboxMarried = React.createRef();
+    this.radioMan = React.createRef();
+    this.radioWoman = React.createRef();
   }
 
   handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
@@ -21,7 +25,9 @@ class Form extends React.Component {
         this.inputName.current?.value +
         this.inputDate.current?.value +
         this.selectPosition.current?.value +
-        this.checkboxMarried.current?.checked
+        this.checkboxMarried.current?.checked +
+        this.radioMan.current?.checked +
+        this.radioWoman.current?.checked
     );
     event.preventDefault();
   }
@@ -50,6 +56,17 @@ class Form extends React.Component {
         <label>
           Married:
           <input type="checkbox" ref={this.checkboxMarried} name="married" defaultChecked />
+        </label>
+        <label>
+          Gender:
+          <label>
+            Man
+            <input type="radio" ref={this.radioMan} name="gender" defaultChecked />
+          </label>
+          <label>
+            Woman
+            <input type="radio" ref={this.radioWoman} name="gender" />
+          </label>
         </label>
         <input type="submit" value="Submit" />
       </form>
