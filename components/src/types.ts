@@ -21,3 +21,4 @@ export type FormProps = {
   date: Date,
   position: string,
 }
+export type MyType = Record<string, React.RefObject<HTMLInputElement>>;
