@@ -1,6 +1,7 @@
 import React from 'react';
+import Form from '../component/Form/Form';
 
-class Form extends React.Component {
+class Formpage extends React.Component {
   render() {
     return (
       <>
@@ -11,4 +12,4 @@ class Form extends React.Component {
   }
 }
 
-export default Form;
+export default Formpage;
