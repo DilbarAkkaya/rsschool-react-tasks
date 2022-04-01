@@ -2,24 +2,30 @@ import React from 'react';
 import { FormProps } from '../../types';
 
 class Form extends React.Component {
-  input: React.RefObject<HTMLInputElement>;
+  inputName: React.RefObject<HTMLInputElement>;
+  inputDate: React.RefObject<HTMLInputElement>;
   constructor(props: FormProps) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.input = React.createRef();
+    this.inputName = React.createRef();
+    this.inputDate = React.createRef();
   }
 
   handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
-    alert('fffff' + this.input.current?.value);
+    alert('Inpormation' + this.inputName.current?.value + this.inputDate.current?.value);
     event.preventDefault();
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="card-block">
         <label>
-          Имя:
-          <input type="text" ref={this.input} />
+          Employer name:
+          <input type="text" ref={this.inputName} />
+        </label>
+        <label>
+          Empolyer birthday:
+          <input type="date" ref={this.inputDate} />
         </label>
         <input type="submit" value="Submit" />
       </form>
