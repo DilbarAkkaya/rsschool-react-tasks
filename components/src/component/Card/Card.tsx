@@ -1,5 +1,5 @@
 import React from 'react';
-import IDataOfToys from '../../types';
+import { IDataOfToys } from '../../types';
 import './card.css';
 
 class Card extends React.Component<IDataOfToys> {
