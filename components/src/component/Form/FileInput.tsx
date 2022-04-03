@@ -1,11 +1,9 @@
 import React, { SyntheticEvent } from 'react';
+import { FileProps } from '../../types';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-class FileInput extends React.Component<any, any> {
-  //fileInput: React.RefObject<HTMLInputElement>;
-  constructor(props: File) {
+class FileInput extends React.Component<FileProps> {
+  constructor(props: FileProps) {
     super(props);
-    //this.fileInput = React.createRef();
   }
   fileSelectHandler(event: SyntheticEvent<HTMLInputElement>) {
     console.log(event);

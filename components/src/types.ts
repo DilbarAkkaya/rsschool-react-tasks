@@ -30,3 +30,5 @@ export interface IDataForm {
   gender: string,
   file: string,
 }
+
+export type FileProps = { refInput?: string };
