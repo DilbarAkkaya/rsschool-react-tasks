@@ -31,4 +31,4 @@ export interface IDataForm {
   file: string,
 }
 
-export type FileProps = { refInput?: string };
+export type FileProps = { refInput?: React.RefObject<HTMLInputElement> };
