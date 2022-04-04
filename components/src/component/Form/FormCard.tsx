@@ -8,13 +8,9 @@ class FormCard extends React.Component<IDataForm> {
   render() {
     const { name, file, date, position, married, gender } = this.props;
     return (
-      <div className="card" data-testid="card">
+      <div className="card">
         <h2 className="card-title">Name of employer {name}</h2>
-        <img
-          src={file}
-          alt="employer"
-          className="card-img"
-        />
+        <img src={file} alt="employer" className="card-img" />
         <div className="card-descr">
           <p className="count">
             Date of birthday: <span>{date}</span>

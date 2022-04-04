@@ -123,12 +123,12 @@ class Form extends React.Component<MyType, StateIsDraw> {
         </form>
         {this.state.isDrawPicture && (
           <FormCard
-            {...(this.inputName.current?.value,
-            this.fileInput.current?.value,
-            this.inputDate.current?.value,
-            this.selectPosition.current?.value,
-            this.checkboxMarried.current?.value,
-            this.selectGender)}
+            name={this.inputName.current?.value}
+            file={this.fileInput.current?.value}
+            date={this.inputDate.current?.value}
+            position={this.selectPosition.current?.value}
+            married={this.checkboxMarried.current?.value}
+            //gender={this.selectGender}
           />
         )}
       </>
