@@ -43,13 +43,20 @@ class Form extends React.Component<MyType, StateIsDraw> {
     !this.inputDate.current?.value.length
       ? this.setState({ dateError: true })
       : this.setState({ dateError: false });
-
-    if (this.inputName.current?.value.length && this.inputDate.current?.value.length) {
-      this.setState({ isDrawPicture: !this.state.isDrawPicture });
+    this.selectPosition.current?.[0]
+      ? this.setState({ positionError: true })
+      : this.setState({ positionError: false });
+    console.log('aaaaaaaaaaaaaaaaaaaa', this.selectPosition.current?.[0]);
+    if (
+      this.inputName.current?.value.length &&
+      this.inputDate.current?.value.length &&
+      !this.selectPosition.current?.[0]
+    ) {
+      this.setState({ buttonDisabled: !this.state.buttonDisabled });
     }
   }
 
-  enableButton() {
+  /*   enableButton() {
     if (
       this.inputName.current?.value.length &&
       this.inputDate.current?.value.length &&
@@ -58,9 +65,9 @@ class Form extends React.Component<MyType, StateIsDraw> {
       (this.radioMan.current?.value || this.radioWoman.current?.value) &&
       this.fileInput.current?.value
     ) {
-      this.setState({ buttonDisabled: false });
+      this.setState({ buttonDisabled: !this.state.buttonDisabled });
     }
-  }
+  } */
   handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
     this.setState({ isDrawPicture: true });
@@ -79,7 +86,13 @@ class Form extends React.Component<MyType, StateIsDraw> {
           <div className="text-field">
             <label className="text-field__label">
               Name of employer:
-              <input type="text" ref={this.inputName} defaultValue="" placeholder="name" />
+              <input
+                type="text"
+                ref={this.inputName}
+                defaultValue=""
+                placeholder="name"
+                onBlur={this.validate}
+              />
               {this.state.nameError && <div className="error">name is empty</div>}
             </label>
             <label className="text-field__label">
@@ -108,19 +121,30 @@ class Form extends React.Component<MyType, StateIsDraw> {
           <div className="text-field">
             <label className="text-field__label">
               Married:
-              <input type="checkbox" ref={this.checkboxMarried} name="married" defaultChecked />
+              <input
+                type="checkbox"
+                ref={this.checkboxMarried}
+                name="married"
+                defaultChecked
+                defaultValue={'Yes'}
+              />
             </label>
             <label className="text-field__label">
               Gender:
               <label className="text-field__label">
                 Man
-                <input type="radio" ref={this.radioMan} name="gender" defaultChecked />
+                <input
+                  type="radio"
+                  ref={this.radioMan}
+                  name="gender"
+                  defaultChecked
+                  defaultValue={'Man'}
+                />
               </label>
               <label className="text-field__label">
                 Woman
-                <input type="radio" ref={this.radioWoman} name="gender" />
+                <input type="radio" ref={this.radioWoman} name="gender" defaultValue={'Woman'} />
               </label>
-              <div className="error">{this.state.genderError}</div>
             </label>
           </div>
           <FileInput refInput={this.fileInput}>
