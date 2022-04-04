@@ -17,8 +17,8 @@ class Form extends React.Component<MyType, StateIsDraw> {
     super(props);
     this.state = {
       isDrawPicture: false,
-      nameError: 'name is empty',
-      dateError: 'date is empty',
+      nameError: false,
+      dateError: false,
       marriedError: '',
       positionError: 'position not selected',
       genderError: '',
@@ -26,6 +26,7 @@ class Form extends React.Component<MyType, StateIsDraw> {
       buttonDisabled: true,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.validate = this.validate.bind(this);
     this.inputName = React.createRef();
     this.inputDate = React.createRef();
     this.selectPosition = React.createRef();
@@ -36,12 +37,14 @@ class Form extends React.Component<MyType, StateIsDraw> {
   }
 
   validate() {
-    if (this.inputName.current?.value.length) {
-      this.setState({ nameError: '' });
-    }
-    if (this.inputDate.current?.value.length) {
-      this.setState({ dateError: '' });
-    }
+    !this.inputName.current?.value.length
+      ? this.setState({ nameError: true })
+      : this.setState({ nameError: false});
+    
+    !this.inputDate.current?.value.length
+      ? this.setState({ dateError: true })
+      : this.setState({ dateError: false});
+
     if (this.inputName.current?.value.length && this.inputDate.current?.value.length) {
       this.setState({ isDrawPicture: !this.state.isDrawPicture });
     }
@@ -61,12 +64,9 @@ class Form extends React.Component<MyType, StateIsDraw> {
   }
   handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
-    this.validate();
-    /*     if (validation) {
-      this.setState({ isDrawPicture: !this.state.isDrawPicture });
-    } */
-    console.log('INFO', this.fileInput.current?.value);
+    this.setState({ isDrawPicture: true});
   }
+
   selectGender() {
     this.radioMan.current?.checked ? this.radioMan.current?.value : this.radioWoman.current?.value;
   }
@@ -79,12 +79,12 @@ class Form extends React.Component<MyType, StateIsDraw> {
             <label className="text-field__label">
               Name of employer:
               <input type="text" ref={this.inputName} defaultValue="name" />
-              <div className="error">{this.state.nameError}</div>
+              {this.state.nameError && <div className="error">name is empty</div>}
             </label>
             <label className="text-field__label">
               Date of birthday:
               <input type="date" ref={this.inputDate} defaultValue="birthday" required />
-              <div className="error">{this.state.dateError}</div>
+              {this.state.dateError && <div className="error">invalid date</div>}
             </label>
             <label className="text-field__label">
               Choose a position:
@@ -95,7 +95,7 @@ class Form extends React.Component<MyType, StateIsDraw> {
                 <option value="fullstack">Fullstack</option>
                 <option value="analist">Analist</option>
               </select>
-              <div className="error">{this.state.positionError}</div>
+              {this.state.positionError && <div className="error">position not selected</div>}
             </label>
           </div>
           <div className="text-field">
@@ -128,7 +128,7 @@ class Form extends React.Component<MyType, StateIsDraw> {
             date={this.inputDate.current?.value}
             position={this.selectPosition.current?.value}
             married={this.checkboxMarried.current?.value}
-            //gender={this.selectGender}
+            gender={this.selectGender()}
           />
         )}
       </>

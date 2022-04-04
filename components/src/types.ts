@@ -16,8 +16,8 @@ export type MyProps = { value?: string };
 export type MyState = { value: string };
 export type StateIsDraw = { 
   isDrawPicture: boolean,
-  nameError: string,
-  dateError: string,
+  nameError: boolean,
+  dateError: boolean,
   positionError: string,
   marriedError: string,
   genderError: string,
