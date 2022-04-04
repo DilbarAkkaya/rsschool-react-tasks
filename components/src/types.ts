@@ -18,10 +18,10 @@ export type StateIsDraw = {
   isDrawPicture: boolean,
   nameError: boolean,
   dateError: boolean,
-  positionError: string,
+  positionError: boolean,
   marriedError: string,
-  genderError: string,
-  fileError: string,
+  genderError: boolean,
+  fileError: boolean,
   buttonDisabled: boolean,
 };
 export type FormProps = {

@@ -20,9 +20,9 @@ class Form extends React.Component<MyType, StateIsDraw> {
       nameError: false,
       dateError: false,
       marriedError: '',
-      positionError: 'position not selected',
-      genderError: '',
-      fileError: 'file is empty',
+      positionError: false,
+      genderError: false,
+      fileError: false,
       buttonDisabled: true,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,11 +39,10 @@ class Form extends React.Component<MyType, StateIsDraw> {
   validate() {
     !this.inputName.current?.value.length
       ? this.setState({ nameError: true })
-      : this.setState({ nameError: false});
-    
+      : this.setState({ nameError: false });
     !this.inputDate.current?.value.length
       ? this.setState({ dateError: true })
-      : this.setState({ dateError: false});
+      : this.setState({ dateError: false });
 
     if (this.inputName.current?.value.length && this.inputDate.current?.value.length) {
       this.setState({ isDrawPicture: !this.state.isDrawPicture });
@@ -64,11 +63,13 @@ class Form extends React.Component<MyType, StateIsDraw> {
   }
   handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
-    this.setState({ isDrawPicture: true});
+    this.setState({ isDrawPicture: true });
   }
 
   selectGender() {
-    this.radioMan.current?.checked ? this.radioMan.current?.value : this.radioWoman.current?.value;
+    return this.radioMan.current?.checked
+      ? this.radioMan.current?.defaultValue
+      : this.radioWoman.current?.defaultValue;
   }
 
   render() {
@@ -78,12 +79,18 @@ class Form extends React.Component<MyType, StateIsDraw> {
           <div className="text-field">
             <label className="text-field__label">
               Name of employer:
-              <input type="text" ref={this.inputName} defaultValue="name" />
+              <input type="text" ref={this.inputName} defaultValue="" placeholder="name" />
               {this.state.nameError && <div className="error">name is empty</div>}
             </label>
             <label className="text-field__label">
               Date of birthday:
-              <input type="date" ref={this.inputDate} defaultValue="birthday" required />
+              <input
+                type="date"
+                ref={this.inputDate}
+                defaultValue="birthday"
+                required
+                onBlur={this.validate}
+              />
               {this.state.dateError && <div className="error">invalid date</div>}
             </label>
             <label className="text-field__label">
