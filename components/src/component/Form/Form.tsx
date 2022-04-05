@@ -87,45 +87,47 @@ class Form extends React.Component<MyType, StateIsDraw> {
       <>
         <form onSubmit={this.handleSubmit} className="form-wrapper">
           <div className="text-field">
-            <label className="text-field__label">
+            <label className="text-field__label" htmlFor="name">
               Name of employer:
-              <input
-                type="text"
-                ref={this.inputName}
-                defaultValue=""
-                placeholder="name"
-                onChange={this.validate}
-              />
-              {this.state.nameError && <div className="error">name is empty</div>}
             </label>
-            <label className="text-field__label">
+            <input
+              id="name"
+              type="text"
+              ref={this.inputName}
+              defaultValue=""
+              placeholder="name"
+              onChange={this.validate}
+            />
+            {this.state.nameError && <div className="error">name is empty</div>}
+            <label className="text-field__label" htmlFor="date">
               Date of birthday:
-              <input
-                type="date"
-                ref={this.inputDate}
-                defaultValue="birthday"
-                required
-                onChange={this.validate}
-              />
-              {this.state.dateError && <div className="error">invalid date</div>}
             </label>
-            <label className="text-field__label">
+            <input
+              id="date"
+              type="date"
+              ref={this.inputDate}
+              defaultValue="birthday"
+              required
+              onChange={this.validate}
+            />
+            {this.state.dateError && <div className="error">invalid date</div>}
+            <label className="text-field__label" htmlFor="position">
               Choose a position:
-              <select
-                ref={this.selectPosition}
-                name="position"
-                id="position"
-                defaultValue=""
-                onChange={this.validate}
-              >
-                <option value=""></option>
-                <option value="frontend">Frontend</option>
-                <option value="backend">Backend</option>
-                <option value="fullstack">Fullstack</option>
-                <option value="analist">Analist</option>
-              </select>
-              {this.state.positionError && <div className="error">position is empty</div>}
             </label>
+            <select
+              ref={this.selectPosition}
+              name="position"
+              id="position"
+              defaultValue=""
+              onChange={this.validate}
+            >
+              <option value=""></option>
+              <option value="Frontend">Frontend</option>
+              <option value="Backend">Backend</option>
+              <option value="Fullstack">Fullstack</option>
+              <option value="Analist">Analist</option>
+            </select>
+            {this.state.positionError && <div className="error">position is empty</div>}
           </div>
           <div className="text-field">
             <label className="text-field__label">
@@ -147,12 +149,12 @@ class Form extends React.Component<MyType, StateIsDraw> {
                   ref={this.radioMan}
                   name="gender"
                   defaultChecked
-                  defaultValue={'Man'}
+                  defaultValue={'MALE'}
                 />
               </label>
               <label className="text-field__label">
                 Woman
-                <input type="radio" ref={this.radioWoman} name="gender" defaultValue={'Woman'} />
+                <input type="radio" ref={this.radioWoman} name="gender" defaultValue={'FEMALE'} />
               </label>
             </label>
           </div>
