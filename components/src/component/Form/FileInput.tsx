@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react';
+import React from 'react';
 import { FileProps } from '../../types';
 
 class FileInput extends React.Component<FileProps> {
@@ -8,10 +8,6 @@ class FileInput extends React.Component<FileProps> {
       selectedFile: null,
     };
   }
-  fileSelectHandler(event: SyntheticEvent<HTMLInputElement>) {
-    console.log((event.target as HTMLInputElement)?.files?.[0]);
-    this.setState({ selectedFile: (event.target as HTMLInputElement)?.files?.[0] });
-  }
   render() {
     const { refInput } = this.props;
     return (
@@ -19,13 +15,7 @@ class FileInput extends React.Component<FileProps> {
         <label className="text-field__label" htmlFor="file">
           Upload file:
         </label>
-        <input
-          id="file"
-          type="file"
-          ref={refInput}
-          onChange={this.fileSelectHandler}
-          className="text-field__label"
-        />
+        <input id="file" type="file" ref={refInput} className="text-field__label" />
       </>
     );
   }

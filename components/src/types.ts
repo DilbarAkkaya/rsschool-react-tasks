@@ -1,3 +1,5 @@
+import { ChangeEventHandler, SyntheticEvent } from "react";
+
 export interface IDataOfToys {
   num?: string,
   name: string,
