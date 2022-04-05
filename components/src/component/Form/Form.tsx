@@ -40,7 +40,6 @@ class Form extends React.Component<MyType, StateIsDraw> {
   }
 
   validate() {
-    console.log('dd', this.fileInput.current?.value);
     !this.inputName.current?.value.length
       ? this.setState({ nameError: true })
       : this.setState({ nameError: false });
@@ -77,11 +76,9 @@ class Form extends React.Component<MyType, StateIsDraw> {
 
   getFile() {
     const a = URL.createObjectURL(this.fileInput.current?.files?.[0] as Blob);
-    if (this.fileInput.current?.value) {
-      this.fileInput.current.src = a;
-    } else {
-      this.setState({ fileError: true });
-    }
+    this.fileInput.current?.value
+      ? (this.fileInput.current.src = a)
+      : this.setState({ fileError: true });
   }
 
   render() {
