@@ -36,7 +36,7 @@ export interface IDataForm {
   name?: string,
   date?: string,
   position?: string,
-  married?: string,
+  married?: string | boolean,
   gender?: string,
   file?: string,
 }

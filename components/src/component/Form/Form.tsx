@@ -43,14 +43,13 @@ class Form extends React.Component<MyType, StateIsDraw> {
     !this.inputDate.current?.value.length
       ? this.setState({ dateError: true })
       : this.setState({ dateError: false });
-    this.selectPosition.current?.[0]
+    !this.selectPosition.current?.value.length
       ? this.setState({ positionError: true })
       : this.setState({ positionError: false });
-    console.log('aaaaaaaaaaaaaaaaaaaa', this.selectPosition.current?.[0]);
     if (
       this.inputName.current?.value.length &&
       this.inputDate.current?.value.length &&
-      !this.selectPosition.current?.[0]
+      !this.selectPosition.current?.value.length
     ) {
       this.setState({ buttonDisabled: !this.state.buttonDisabled });
     }
@@ -79,6 +78,10 @@ class Form extends React.Component<MyType, StateIsDraw> {
       : this.radioWoman.current?.defaultValue;
   }
 
+  checkMarried() {
+    return this.checkboxMarried.current?.checked ? 'YES' : 'NO';
+  }
+
   render() {
     return (
       <>
@@ -91,7 +94,7 @@ class Form extends React.Component<MyType, StateIsDraw> {
                 ref={this.inputName}
                 defaultValue=""
                 placeholder="name"
-                onBlur={this.validate}
+                onChange={this.validate}
               />
               {this.state.nameError && <div className="error">name is empty</div>}
             </label>
@@ -102,20 +105,26 @@ class Form extends React.Component<MyType, StateIsDraw> {
                 ref={this.inputDate}
                 defaultValue="birthday"
                 required
-                onBlur={this.validate}
+                onChange={this.validate}
               />
               {this.state.dateError && <div className="error">invalid date</div>}
             </label>
             <label className="text-field__label">
               Choose a position:
-              <select ref={this.selectPosition} name="position" id="position" defaultValue="">
+              <select
+                ref={this.selectPosition}
+                name="position"
+                id="position"
+                defaultValue=""
+                onChange={this.validate}
+              >
                 <option value=""></option>
                 <option value="frontend">Frontend</option>
                 <option value="backend">Backend</option>
                 <option value="fullstack">Fullstack</option>
                 <option value="analist">Analist</option>
               </select>
-              {this.state.positionError && <div className="error">position not selected</div>}
+              {this.state.positionError && <div className="error">position is empty</div>}
             </label>
           </div>
           <div className="text-field">
@@ -126,7 +135,7 @@ class Form extends React.Component<MyType, StateIsDraw> {
                 ref={this.checkboxMarried}
                 name="married"
                 defaultChecked
-                defaultValue={'Yes'}
+                defaultValue={this.checkMarried()}
               />
             </label>
             <label className="text-field__label">
@@ -158,7 +167,7 @@ class Form extends React.Component<MyType, StateIsDraw> {
             file={this.fileInput.current?.value}
             date={this.inputDate.current?.value}
             position={this.selectPosition.current?.value}
-            married={this.checkboxMarried.current?.value}
+            married={this.checkMarried()}
             gender={this.selectGender()}
           />
         )}
