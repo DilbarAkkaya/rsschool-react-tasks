@@ -47,3 +47,8 @@
   font-size: 12px;
   color: red;
 }
+
+.border {
+  display: block;
+  border: #212529;
+}

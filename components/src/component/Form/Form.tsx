@@ -130,32 +130,40 @@ class Form extends React.Component<MyType, StateIsDraw> {
             {this.state.positionError && <div className="error">position is empty</div>}
           </div>
           <div className="text-field">
-            <label className="text-field__label">
+            <label className="text-field__label" htmlFor="marry">
               Married:
-              <input
-                type="checkbox"
-                ref={this.checkboxMarried}
-                name="married"
-                defaultChecked
-                defaultValue={this.checkMarried()}
-              />
             </label>
+            <input
+              id="marry"
+              type="checkbox"
+              ref={this.checkboxMarried}
+              name="married"
+              defaultChecked
+              defaultValue={this.checkMarried()}
+            />
             <label className="text-field__label">
               Gender:
-              <label className="text-field__label">
+              <label className="text-field__label" htmlFor="man">
                 Man
-                <input
-                  type="radio"
-                  ref={this.radioMan}
-                  name="gender"
-                  defaultChecked
-                  defaultValue={'MALE'}
-                />
               </label>
-              <label className="text-field__label">
+              <input
+                id="man"
+                type="radio"
+                ref={this.radioMan}
+                name="gender"
+                defaultChecked
+                defaultValue={'MALE'}
+              />
+              <label className="text-field__label" htmlFor="woman">
                 Woman
-                <input type="radio" ref={this.radioWoman} name="gender" defaultValue={'FEMALE'} />
               </label>
+              <input
+                id="woman"
+                type="radio"
+                ref={this.radioWoman}
+                name="gender"
+                defaultValue={'FEMALE'}
+              />
             </label>
           </div>
           <FileInput refInput={this.fileInput}>
