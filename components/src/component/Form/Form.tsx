@@ -12,6 +12,7 @@ class Form extends React.Component<MyType, StateIsDraw> {
   radioMan: React.RefObject<HTMLInputElement>;
   radioWoman: React.RefObject<HTMLInputElement>;
   fileInput: React.RefObject<HTMLInputElement>;
+  formRef: React.RefObject<HTMLFormElement>;
 
   constructor(props: MyType) {
     super(props);
@@ -34,6 +35,7 @@ class Form extends React.Component<MyType, StateIsDraw> {
     this.radioMan = React.createRef();
     this.radioWoman = React.createRef();
     this.fileInput = React.createRef();
+    this.formRef = React.createRef();
   }
 
   validate() {
@@ -49,7 +51,7 @@ class Form extends React.Component<MyType, StateIsDraw> {
     if (
       this.inputName.current?.value.length &&
       this.inputDate.current?.value.length &&
-      !this.selectPosition.current?.value.length
+      this.selectPosition.current?.value.length
     ) {
       this.setState({ buttonDisabled: !this.state.buttonDisabled });
     }
@@ -70,6 +72,7 @@ class Form extends React.Component<MyType, StateIsDraw> {
   handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
     this.setState({ isDrawPicture: true });
+    //this.formRef.current?.reset();
   }
 
   selectGender() {
@@ -85,7 +88,7 @@ class Form extends React.Component<MyType, StateIsDraw> {
   render() {
     return (
       <>
-        <form onSubmit={this.handleSubmit} className="form-wrapper">
+        <form ref={this.formRef} onSubmit={this.handleSubmit} className="form-wrapper">
           <div className="text-field">
             <label className="text-field__label" htmlFor="name">
               Name of employer:
@@ -167,7 +170,7 @@ class Form extends React.Component<MyType, StateIsDraw> {
             </label>
           </div>
           <FileInput refInput={this.fileInput}>
-            <div className="error">{this.state.fileError}</div>
+            {this.state.fileError && <div className="error">choose file</div>}
           </FileInput>
           <input type="submit" value="Submit" disabled={this.state.buttonDisabled} />
         </form>
