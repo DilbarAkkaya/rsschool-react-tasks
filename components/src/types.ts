@@ -1,4 +1,5 @@
 import { ChangeEventHandler, SyntheticEvent } from "react";
+import { Interface } from "readline";
 
 export interface IDataOfToys {
   num?: string,
@@ -15,7 +16,12 @@ export interface IStorage {
   [key: string]: string
 }
 export type MyProps = { value?: string };
-export type MyState = { value: string };
+export type MyState = { 
+  value: string,
+  isLoaded: boolean,
+  items: [],
+  error?: Error,
+};
 export type StateIsDraw = { 
   isDrawPicture: boolean,
   nameError: boolean,
@@ -46,4 +52,9 @@ export interface IDataForm {
 export type FileProps = { refInput?: React.RefObject<HTMLInputElement> };
 export type disableType = {
   buttonDisabled: boolean,
+}
+export interface IDataApi {
+  idDrink: string,
+  strDrink: string,
+  strDrinkThumb: string,
 }
