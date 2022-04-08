@@ -15,12 +15,11 @@ export interface IDataOfToys {
 export interface IStorage {
   [key: string]: string
 }
-export type MyProps = { value?: string };
+export type MyProps = { 
+  onSearchData: (value: string) => void,
+ };
 export type MyState = { 
   value: string,
-  isLoaded: boolean,
-  items: [],
-  error?: Error,
 };
 export type StateIsDraw = { 
   isDrawPicture: boolean,

@@ -1,19 +1,52 @@
 import React from 'react';
 import SearchPanel from '../component/Search/SearchPanel';
-import Card from '../component/Card/Card';
-import data from '../data';
+import CardApi from '../component/Card/CardApi';
 
-class Main extends React.Component {
+interface MainState {
+  isLoaded: boolean;
+  items: [];
+  error: Error | undefined | string;
+}
+class Main extends React.Component<any, MainState> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      isLoaded: false,
+      items: [],
+      error: undefined,
+    };
+    this.searchData = this.searchData.bind(this);
+  }
+
+  searchData(value: string) {
+    fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${value}`)
+      .then((response) => response.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            items: result.drinks,
+          });
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error,
+          });
+        }
+      );
+  }
+
   render() {
     return (
       <div className="main">
         <h1>Main Page</h1>
         <div className="search-panel">
-          <SearchPanel />
+          <SearchPanel onSearchData={this.searchData} />
         </div>
         <div className="card-block" id="card-block">
-          {data.map((item) => (
-            <Card key={item.num} {...item}></Card>
+          {this.state.items.map((item: any) => (
+            <CardApi key={item.idDrink} {...item}></CardApi>
           ))}
         </div>
       </div>

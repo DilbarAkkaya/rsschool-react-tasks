@@ -10,11 +10,7 @@ class CardApi extends React.Component<IDataApi> {
     return (
       <div className="card" data-testid="card">
         <h2 className="card-title">{this.props.strDrink}</h2>
-        <img
-          src={this.props.strDrinkThumb}
-          alt="toy"
-          className="card-img"
-        />
+        <img src={this.props.strDrinkThumb} alt="toy" className="card-img" />
       </div>
     );
   }
