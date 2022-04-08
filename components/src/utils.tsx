@@ -7,6 +7,7 @@ export async function getData(url: string) {
   return await res.json();
 }
 
-export default function searchData(value: string) {
-  return getData(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${value}`);
+export default function searchData(param: string) {
+  console.log('OK1')
+  return getData(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${param}`);
 }
