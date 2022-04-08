@@ -1,14 +1,15 @@
 import React from 'react';
 import SearchPanel from '../component/Search/SearchPanel';
 import CardApi from '../component/Card/CardApi';
+import { IDataApi } from '../types';
 
 interface MainState {
-  isLoaded: boolean;
-  items: [];
-  error: Error | undefined | string;
+  isLoaded?: boolean;
+  items?: [];
+  error?: Error | undefined | string;
 }
-class Main extends React.Component<any, MainState> {
-  constructor(props: any) {
+class Main extends React.Component<MainState, MainState> {
+  constructor(props: MainState) {
     super(props);
     this.state = {
       isLoaded: false,
@@ -45,7 +46,7 @@ class Main extends React.Component<any, MainState> {
           <SearchPanel onSearchData={this.searchData} />
         </div>
         <div className="card-block" id="card-block">
-          {this.state.items.map((item: any) => (
+          {(this.state.items as Array<IDataApi>).map((item) => (
             <CardApi key={item.idDrink} {...item}></CardApi>
           ))}
         </div>
