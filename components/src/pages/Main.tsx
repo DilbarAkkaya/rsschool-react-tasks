@@ -58,7 +58,7 @@ class Main extends React.Component<MainState, MainState> {
         <div className="search-panel">
           <SearchPanel onSearchData={this.getAllItems} />
         </div>
-        <div className="card-block" id="card-block">
+        <div className="card-block" id="card-block" data-testid="card">
           {(this.state.items as Array<IDataApi>).map((item) => (
             <CardApi key={item.id} {...item}></CardApi>
           ))}

@@ -10,6 +10,6 @@ describe('Card', () => {
       </BrowserRouter>
     );
     const containerCard = screen.getAllByTestId('card');
-    expect(containerCard.length).toBe(20);
+    expect(containerCard.length).toBe(1);
   });
 });
