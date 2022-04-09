@@ -14,8 +14,8 @@ class SearchPanel extends React.Component<MyProps, MyState> {
     this.keyPressHandler = this.keyPressHandler.bind(this);
   }
 
-  handleChange(event: ChangeEvent<HTMLInputElement>) {
-    this.setState({ value: event.target.value });
+  async handleChange(event: ChangeEvent<HTMLInputElement>) {
+    await this.setState({ value: event.target.value });
     localStorage.setItem('searchItem', this.state.value);
   }
 

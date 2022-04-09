@@ -20,16 +20,25 @@ class Main extends React.Component<MainState, MainState> {
   }
 
   async getAllItems() {
-    console.log('ok2');
-    const results = await searchData(`${this.state.items}`);
-    console.log('ok3', this);
+    const results = await searchData('character');
     Promise.resolve(results).then((res) => {
-      console.log('ok4');
-      this.setState({
-        isLoaded: true,
-        items: results.results,
+      const dataResults = res.results;
+      const findData: IDataApi[] = [];
+      (dataResults as Array<IDataApi>).forEach((item) => {
+        if (
+          localStorage
+            .getItem('searchItem')
+            ?.toLowerCase()
+            .includes(`${item.name.toLowerCase().trim()}`)
+        ) {
+          findData.push(item);
+          //console.log('ok5', item);
+          this.setState({
+            isLoaded: true,
+            items: findData,
+          });
+        }
       });
-      console.log(res);
     });
   }
 
