@@ -22,19 +22,24 @@ class Main extends React.Component<MainState, MainState> {
   async getAllItems() {
     const results = await searchData('character');
     Promise.resolve(results).then((res) => {
-      const dataResults = res.results;
+      const dataResults: IDataApi[] = res.results;
       const findData: IDataApi[] = [];
-      (dataResults as Array<IDataApi>).forEach((item) => {
+      dataResults.forEach((item) => {
         if (
-          localStorage
-            .getItem('searchItem')
-            ?.toLowerCase()
-            .includes(`${item.name.toLowerCase().trim()}`)
+          item.name
+            .toLowerCase()
+            .trim()
+            .includes(`${localStorage.getItem('searchItem')?.toLowerCase()}`)
         ) {
           findData.push(item);
-          //console.log('ok5', item);
+          console.log('ok5', item);
           this.setState({
             isLoaded: true,
+            items: findData,
+          });
+        } else {
+          this.setState({
+            isLoaded: false,
             items: findData,
           });
         }
