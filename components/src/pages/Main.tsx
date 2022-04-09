@@ -18,19 +18,19 @@ class Main extends React.Component<MainState, MainState> {
     };
     this.getAllItems = this.getAllItems.bind(this);
   }
-  
+
   async getAllItems() {
-    console.log('ok2')
-    const results = await searchData('Cocktail');
+    console.log('ok2');
+    const results = await searchData('character');
     console.log('ok3', results);
     Promise.resolve(results).then((res) => {
-      console.log('ok4')
+      console.log('ok4');
       this.setState({
         isLoaded: true,
-        items: results.drinks,
+        items: results.results,
       });
       console.log(res);
-    })
+    });
   }
   /*   searchData(value: string) {
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${value}`)
@@ -60,7 +60,7 @@ class Main extends React.Component<MainState, MainState> {
         </div>
         <div className="card-block" id="card-block">
           {(this.state.items as Array<IDataApi>).map((item) => (
-            <CardApi key={item.idDrink} {...item}></CardApi>
+            <CardApi key={item.id} {...item}></CardApi>
           ))}
         </div>
       </div>

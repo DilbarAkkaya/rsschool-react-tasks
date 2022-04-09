@@ -53,7 +53,12 @@ export type disableType = {
   buttonDisabled: boolean,
 }
 export interface IDataApi {
-  idDrink: string | null,
-  strDrink: string,
-  strDrinkThumb: string,
+  id: number | null,
+  name: string,
+  status: string,
+  species: string,
+  type: string,
+  gender: string,
+  image: string,
+  episode: string,
 }

@@ -8,6 +8,6 @@ export async function getData(url: string) {
 }
 
 export default function searchData(param: string) {
-  console.log('OK1')
-  return getData(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${param}`);
+  console.log('OK1');
+  return getData(`https://rickandmortyapi.com/api/${param}`);
 }
