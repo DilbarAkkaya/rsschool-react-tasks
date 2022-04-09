@@ -27,8 +27,10 @@ class SearchPanel extends React.Component<MyProps, MyState> {
     localStorage.setItem('searchItem', this.state.value);
   }
 
-  keyPressHandler() {
-    this.props.onSearchData(this.state.value);
+  keyPressHandler(event: React.KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.props.onSearchData(this.state.value);
+    }
   }
   render() {
     return (

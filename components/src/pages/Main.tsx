@@ -21,8 +21,8 @@ class Main extends React.Component<MainState, MainState> {
 
   async getAllItems() {
     console.log('ok2');
-    const results = await searchData('character');
-    console.log('ok3', results);
+    const results = await searchData(`${this.state.items}`);
+    console.log('ok3', this);
     Promise.resolve(results).then((res) => {
       console.log('ok4');
       this.setState({
@@ -32,24 +32,6 @@ class Main extends React.Component<MainState, MainState> {
       console.log(res);
     });
   }
-  /*   searchData(value: string) {
-    fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${value}`)
-      .then((response) => response.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            items: result.drinks,
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error,
-          });
-        }
-      );
-  } */
 
   render() {
     return (

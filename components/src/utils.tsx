@@ -7,7 +7,7 @@ export async function getData(url: string) {
   return await res.json();
 }
 
-export default function searchData(param: string) {
+export default function searchData(name: string) {
   console.log('OK1');
-  return getData(`https://rickandmortyapi.com/api/${param}`);
+  return getData(`https://rickandmortyapi.com/api/character/?${name}`);
 }
