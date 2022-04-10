@@ -1,8 +1,10 @@
 import React from 'react';
 import SearchPanel from '../component/Search/SearchPanel';
 import CardApi from '../component/Card/CardApi';
+import Modal from '../component/Modal/Modal';
 import { IDataApi } from '../types';
 import searchData from '../utils';
+import Portal from '../component/Portal/Portal';
 interface MainState {
   isLoaded?: boolean;
   items?: Array<IDataApi>;
@@ -58,6 +60,11 @@ class Main extends React.Component<MainState, MainState> {
           {(this.state.items as Array<IDataApi>).map((item) => (
             <CardApi key={item.id} {...item}></CardApi>
           ))}
+          <Portal>
+            <Modal>
+              <h1>About character</h1>
+            </Modal>
+          </Portal>
         </div>
       </div>
     );

@@ -1,13 +1,19 @@
+:root {
+  --main-text-color: #47b0bd;
+  --modal-back-color: #949b9c;
+}
+
 .modal {
   position: absolute;
-  top: 0;
-  width: 100%;
+  top: 10%;
+  margin: 0 auto;
+  width: 50%;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  background-color: rgba(0,0,0, .9);
+  color: var(--main-text-color);
+  background-color: var(--modal-back-color);
   z-index: 100;
 }
 
