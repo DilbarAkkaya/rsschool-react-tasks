@@ -9,6 +9,7 @@ interface MainState {
   isLoaded?: boolean;
   items?: Array<IDataApi>;
   error?: Error | undefined | string;
+  activeModal: boolean;
 }
 class Main extends React.Component<MainState, MainState> {
   constructor(props: MainState) {
@@ -17,6 +18,7 @@ class Main extends React.Component<MainState, MainState> {
       isLoaded: false,
       items: [],
       error: undefined,
+      activeModal: true,
     };
     this.getAllItems = this.getAllItems.bind(this);
   }
@@ -49,6 +51,9 @@ class Main extends React.Component<MainState, MainState> {
     });
   }
 
+  setModalActive() {
+    this.setState({activeModal: false})
+  }
   render() {
     return (
       <div className="main">
@@ -61,7 +66,7 @@ class Main extends React.Component<MainState, MainState> {
             <CardApi key={item.id} {...item}></CardApi>
           ))}
           <Portal>
-            <Modal>
+            <Modal active={this.state.activeModal} setActive={this.setModalActive}>
               <h1>About character</h1>
             </Modal>
           </Portal>
