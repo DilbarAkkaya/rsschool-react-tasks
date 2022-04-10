@@ -1,5 +1,10 @@
+
 import React from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import './Modal.css';
+
+
 
 class Modal extends React.Component {
   state={
@@ -9,9 +14,7 @@ class Modal extends React.Component {
   render() {
     return (
       <div className="modal">
-        <button className="modal__close-button">
-          Close
-        </button>
+       <FontAwesomeIcon icon={faXmark} className="modal__close-button"/>
         {this.props.children}
       </div>
     )
