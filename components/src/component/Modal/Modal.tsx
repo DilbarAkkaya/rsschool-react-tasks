@@ -14,7 +14,7 @@ class Modal extends React.Component<ModalProps, any> {
   constructor(props: ModalProps) {
   super(props);
   this.state={
-    active: true,
+    active: false,
   }
   this.setActive = this.setActive.bind(this);
   }

@@ -18,7 +18,7 @@ class Main extends React.Component<MainState, MainState> {
       isLoaded: false,
       items: [],
       error: undefined,
-      activeModal: true,
+      activeModal: false,
     };
     this.getAllItems = this.getAllItems.bind(this);
     this.setModalActive = this.setModalActive.bind(this);
