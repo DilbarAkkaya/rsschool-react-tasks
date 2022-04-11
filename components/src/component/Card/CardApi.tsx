@@ -30,19 +30,19 @@ handleCard(){
             Species:
             <span>{this.props.species}</span>
           </p>
-          <p>
+{/*           <p>
             Type:
             <span>{this.props.type}</span>
-          </p>
+          </p> */}
           <p>
             Gender:
             <span>{this.props.gender}</span>
           </p>
-          <ul>
+{/*           <ul>
             Episode:
             <li>{this.props.episode[0]}</li>
             <li>{this.props.episode[1]}</li>
-          </ul>
+          </ul> */}
         </div>
       </div>
     );

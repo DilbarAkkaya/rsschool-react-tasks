@@ -60,7 +60,15 @@ export interface IDataApi {
   type: string,
   gender: string,
   image: string,
+  origin: {
+    name: string,
+    url:string,
+  }
   episode: string,
+  location: {
+    name: string,
+    url: string,
+  },
 }
 export type SelectedProps = { 
   handleClick: (id:number |null) => void;

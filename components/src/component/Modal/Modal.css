@@ -28,6 +28,8 @@ transition: 0.5s;
   padding: 20px;
   border-radius: 12px;
   background-color: var(--content-back-color);
+  width: 400px;
+  height: 550px;
 }
 .modal .modal__close-button {
   position: absolute;
