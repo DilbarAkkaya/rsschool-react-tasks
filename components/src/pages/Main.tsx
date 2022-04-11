@@ -75,7 +75,6 @@ this.setState({selectedCard: findCard})
       <div className="main">
         <h1>Main Page</h1>
         <div className="search-panel">
-          <button  onClick={this.setModalActive}>clickme</button>
           <SearchPanel onSearchData={this.getAllItems} />
         </div>
         <div className="card-block" id="card-block" data-testid="card">
