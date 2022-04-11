@@ -1,25 +1,29 @@
 :root {
   --main-text-color: #47b0bd;
   --modal-back-color: rgba(0, 0, 0, 0.5);
+  --content-back-color: #ffffff;
 }
 
 .modal {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 70%;
-  height: 70%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--main-text-color);
-  background-color: var(--modal-back-color);
-  z-index: 100;
+height: 100vh;
+width: 100vw;
+background-color: var(--modal-back-color);
+position: fixed;
+top: 0;
+left: 0;
+display: flex;
+align-items: center;
+justify-content: center;
 }
 
+.modal__content {
+  padding: 20px;
+  border-radius: 12px;
+  background-color: var(--content-back-color);
+}
 .modal .modal__close-button {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 75px;
+  right: 35px;
+  font-size: 35px;
 }
