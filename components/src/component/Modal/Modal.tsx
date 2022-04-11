@@ -22,7 +22,6 @@ class Modal extends React.Component<ModalProps, any> {
   }
 
   setActive() {
-    console.log('ok1')
     this.props.setActive(this.state.active);
   }
   render() {

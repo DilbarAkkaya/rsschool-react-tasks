@@ -13,7 +13,6 @@ class CardApi extends React.Component<cardApiProps> {
   }
 
 handleCard(){
-  console.log('ok5555')
   this.props.handleClick(this.props.id);
 }
   render() {

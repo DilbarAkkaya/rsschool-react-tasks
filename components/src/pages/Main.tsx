@@ -43,7 +43,6 @@ class Main extends React.Component<MainState, MainState> {
             .includes(`${localStorage.getItem('searchItem')?.toLowerCase()}`)
         ) {
           findData.push(item);
-          console.log('ok5', item);
           this.setState({
             isLoaded: true,
             items: findData,
@@ -59,7 +58,6 @@ class Main extends React.Component<MainState, MainState> {
   }
 
   setModalActive() {
-    console.log("ok10")
     this.setState({activeModal: !this.state.activeModal})
   }
 
@@ -67,7 +65,6 @@ class Main extends React.Component<MainState, MainState> {
    const findCard = this.state.items?.find(el=>el.id === id)
   
 this.setState({selectedCard: findCard}) 
-    console.log(this.state.selectedCard)
     this.setModalActive();
   }
   render() {
