@@ -9,9 +9,9 @@ import Portal from '../component/Portal/Portal';
 interface MainState {
   isLoaded?: boolean;
   items?: Array<IDataApi>;
-  error?: Error | undefined | string;
+  error?: boolean;
   activeModal?: boolean;
-  selectedCard?: IDataApi |null;
+  selectedCard?: IDataApi | null;
   onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
@@ -21,7 +21,7 @@ class Main extends React.Component<MainState, MainState> {
     this.state = {
       isLoaded: false,
       items: [],
-      error: undefined,
+      error: false,
       activeModal: false,
       selectedCard: null,
     };
@@ -54,37 +54,41 @@ class Main extends React.Component<MainState, MainState> {
           });
         }
       });
-    });
+    }).catch(this.onError)
   }
 
+  onError(){
+    this.setState({isLoaded: false, error: true})
+  }
   setModalActive() {
-    this.setState({activeModal: !this.state.activeModal})
+    this.setState({ activeModal: !this.state.activeModal })
   }
 
-  handleClick(id: number){
-   const findCard = this.state.items?.find(el=>el.id === id)
-  
-this.setState({selectedCard: findCard}) 
+  handleClick(id: number) {
+    const findCard = this.state.items?.find(el => el.id === id)
+
+    this.setState({ selectedCard: findCard })
     this.setModalActive();
   }
   render() {
-    return (
-      <div className="main">
-        <h1>Main Page</h1>
-        <div className="search-panel">
-          <SearchPanel onSearchData={this.getAllItems} />
+
+      return (
+        <div className="main">
+          <h1>Main Page</h1>
+          <div className="search-panel">
+            <SearchPanel onSearchData={this.getAllItems} />
+          </div>
+          <div className="card-block" id="card-block" data-testid="card">
+            {(this.state.items as Array<IDataApi>).map((item) => (
+              <CardApi key={item.id} {...item} handleClick={this.handleClick}></CardApi>
+            ))}
+            <Portal>
+              <Modal active={this.state.activeModal} setActive={this.setModalActive} selectedCard={this.state.selectedCard}>
+              </Modal>
+            </Portal>
+          </div>
         </div>
-        <div className="card-block" id="card-block" data-testid="card">
-          {(this.state.items as Array<IDataApi>).map((item) => (
-            <CardApi key={item.id} {...item} handleClick={this.handleClick}></CardApi>
-          ))}
-          <Portal>
-            <Modal active={this.state.activeModal} setActive={this.setModalActive} selectedCard={this.state.selectedCard}>
-            </Modal>
-          </Portal>
-        </div>
-      </div>
-    );
+      );
   }
 }
 
