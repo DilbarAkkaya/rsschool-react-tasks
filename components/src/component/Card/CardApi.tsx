@@ -1,14 +1,24 @@
 import React from 'react';
-import { IDataApi } from '../../types';
+import { IDataApi, SelectedProps } from '../../types';
 import './card.css';
 
-class CardApi extends React.Component<IDataApi> {
-  constructor(props: IDataApi) {
+interface cardApiProps extends IDataApi {
+  handleClick: (id: number) => void;
+}
+class CardApi extends React.Component<cardApiProps> {
+  constructor(props: cardApiProps) {
     super(props);
+
+    this.handleCard = this.handleCard.bind(this)
   }
+
+handleCard(){
+  console.log('ok5555')
+  this.props.handleClick(this.props.id);
+}
   render() {
     return (
-      <div className="card">
+      <div className="card" onClick={this.handleCard}>
         <h2 className="card-title">{this.props.name}</h2>
         <img src={this.props.image} alt="toy" className="card-img" />
         <div className="card-descr">

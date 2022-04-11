@@ -53,7 +53,7 @@ export type disableType = {
   buttonDisabled: boolean,
 }
 export interface IDataApi {
-  id: number | null,
+  id: number,
   name: string,
   status: string,
   species: string,
@@ -62,3 +62,6 @@ export interface IDataApi {
   image: string,
   episode: string,
 }
+export type SelectedProps = { 
+  handleClick: (id:number |null) => void;
+ };
