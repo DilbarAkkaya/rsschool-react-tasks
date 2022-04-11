@@ -14,12 +14,22 @@ left: 0;
 display: flex;
 align-items: center;
 justify-content: center;
+opacity: 0;
+pointer-events: none;
+transition: 0.5s;
+}
+
+.modal.active {
+  opacity: 1;
+  pointer-events: all;
 }
 
 .modal__content {
   padding: 20px;
   border-radius: 12px;
   background-color: var(--content-back-color);
+  width: 400px;
+  height: 400px;
 }
 .modal .modal__close-button {
   position: absolute;

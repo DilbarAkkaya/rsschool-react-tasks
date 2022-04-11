@@ -7,7 +7,7 @@ import './Modal.css';
 
 interface ModalProps {
   active: boolean,
-  setActive: ()=> void,
+  setActive: (value: boolean)=> void,
 }
 
 class Modal extends React.Component<ModalProps, any> {
@@ -21,11 +21,11 @@ class Modal extends React.Component<ModalProps, any> {
 
 setActive() {
   console.log('ok1')
-  this.setState({active: false})
+  this.props.setActive(this.state.active);
 }
   render() {
     return ( 
-        <div className="modal" onClick={this.setActive}>
+        <div className={this.props.active ? "modal active" : "modal"} onClick={this.setActive}>
           <FontAwesomeIcon icon={faXmark} className="modal__close-button" onClick={this.setActive}/>
           <div className="modal__content" onClick={e=> e.stopPropagation()}>
             

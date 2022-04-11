@@ -21,6 +21,7 @@ class Main extends React.Component<MainState, MainState> {
       activeModal: true,
     };
     this.getAllItems = this.getAllItems.bind(this);
+    this.setModalActive = this.setModalActive.bind(this);
   }
 
   async getAllItems() {
@@ -52,13 +53,15 @@ class Main extends React.Component<MainState, MainState> {
   }
 
   setModalActive() {
-    this.setState({activeModal: false})
+    console.log("ok10")
+    this.setState({activeModal: !this.state.activeModal})
   }
   render() {
     return (
       <div className="main">
         <h1>Main Page</h1>
         <div className="search-panel">
+          <button  onClick={this.setModalActive}>clickme</button>
           <SearchPanel onSearchData={this.getAllItems} />
         </div>
         <div className="card-block" id="card-block" data-testid="card">
