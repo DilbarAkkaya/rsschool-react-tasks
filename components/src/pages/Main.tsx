@@ -36,19 +36,22 @@ class Main extends React.Component<MainState, MainState> {
   async getAllItems() {
     await searchData('character')
       .then((res) => {
+        this.setState({isLoaded:true})
         const dataResults: IDataApi[] = res.results;
         const findData: IDataApi[] = [];
-        dataResults.forEach((item) => {
-          if (
-            item.name
-              .toLowerCase()
-              .trim()
-              .includes(`${localStorage.getItem('searchItem')?.toLowerCase()}`)
-          ) {
-            findData.push(item);
-            this.setState({ isLoaded: true, items: findData });
-          }
-        });
+        setTimeout(()=>{
+          dataResults.forEach((item) => {
+            if (
+              item.name
+                .toLowerCase()
+                .trim()
+                .includes(`${localStorage.getItem('searchItem')?.toLowerCase()}`)
+            ) {
+              findData.push(item);
+              this.setState({ isLoaded: false, items: findData });
+            }
+          });
+        }, 1000);
       })
       .catch(this.onError);
   }
@@ -70,13 +73,17 @@ class Main extends React.Component<MainState, MainState> {
 
   render() {
     const errorMessage = this.state.error ? <ErrorMessage /> : null;
+    const spinner = this.state.isLoaded ? <Spinner /> : null;
     return (
       <div className="main">
         <h1>Main Page</h1>
+ 
         <div className="search-panel">
           <SearchPanel onSearchData={this.getAllItems} />
         </div>
+        {spinner}
         <div className="card-block" id="card-block" data-testid="card">
+         
           {errorMessage}
           {(this.state.items as Array<IDataApi>).map((item) => (
             <CardApi key={item.id} {...item} handleClick={this.handleClick}></CardApi>
