@@ -1,8 +1,8 @@
 import React from 'react';
 import { MyType, StateIsDraw } from '../../types';
 import FileInput from './FileInput';
-import './form.css';
 import FormCard from './FormCard';
+import './form.css';
 
 class Form extends React.Component<MyType, StateIsDraw> {
   inputName: React.RefObject<HTMLInputElement>;

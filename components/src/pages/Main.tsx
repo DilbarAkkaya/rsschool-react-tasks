@@ -56,6 +56,7 @@ class Main extends React.Component<MainState, MainState> {
   onError() {
     this.setState({ isLoaded: false, error: true });
   }
+
   setModalActive() {
     this.setState({ activeModal: !this.state.activeModal });
   }
@@ -66,6 +67,7 @@ class Main extends React.Component<MainState, MainState> {
     this.setState({ selectedCard: findCard });
     this.setModalActive();
   }
+
   render() {
     const errorMessage = this.state.error ? <ErrorMessage /> : null;
     return (

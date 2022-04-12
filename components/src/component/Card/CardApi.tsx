@@ -5,13 +5,12 @@ import './card.css';
 interface cardApiProps extends IDataApi {
   handleClick: (id: number) => void;
 }
+
 class CardApi extends React.Component<cardApiProps> {
   constructor(props: cardApiProps) {
     super(props);
-
     this.handleCard = this.handleCard.bind(this);
   }
-
   handleCard() {
     this.props.handleClick(this.props.id);
   }

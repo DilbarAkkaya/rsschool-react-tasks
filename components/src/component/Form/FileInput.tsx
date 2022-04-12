@@ -8,6 +8,7 @@ class FileInput extends React.Component<FileProps> {
       selectedFile: null,
     };
   }
+
   render() {
     const { refInput } = this.props;
     return (

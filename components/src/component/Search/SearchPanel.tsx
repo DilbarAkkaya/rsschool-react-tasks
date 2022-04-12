@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
-import './search.css';
 import { MyState, MyProps } from '../../types';
+import './search.css';
 
 class SearchPanel extends React.Component<MyProps, MyState> {
   constructor(props: MyProps) {
@@ -32,6 +32,7 @@ class SearchPanel extends React.Component<MyProps, MyState> {
       this.props.onSearchData(this.state.value);
     }
   }
+
   render() {
     return (
       <input

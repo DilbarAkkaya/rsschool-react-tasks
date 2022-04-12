@@ -5,6 +5,7 @@ class FormCard extends React.Component<IDataForm> {
   constructor(props: IDataForm) {
     super(props);
   }
+
   render() {
     const { name, file, date, position, married, gender } = this.props;
     return (

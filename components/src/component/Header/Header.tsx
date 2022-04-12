@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './header.css';
 import { PATH_MAIN, PATH_ABOUT, PATH_OTHER, PATH_FORM } from '../../constants/constants';
+import './header.css';
 
 class Header extends React.Component {
   render() {
