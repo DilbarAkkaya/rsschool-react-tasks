@@ -36,10 +36,10 @@ class Main extends React.Component<MainState, MainState> {
   async getAllItems() {
     await searchData('character')
       .then((res) => {
-        this.setState({isLoaded:true})
+        this.setState({ isLoaded: true });
         const dataResults: IDataApi[] = res.results;
         const findData: IDataApi[] = [];
-        setTimeout(()=>{
+        setTimeout(() => {
           dataResults.forEach((item) => {
             if (
               item.name
@@ -77,13 +77,11 @@ class Main extends React.Component<MainState, MainState> {
     return (
       <div className="main">
         <h1>Main Page</h1>
- 
         <div className="search-panel">
           <SearchPanel onSearchData={this.getAllItems} />
         </div>
         {spinner}
         <div className="card-block" id="card-block" data-testid="card">
-         
           {errorMessage}
           {(this.state.items as Array<IDataApi>).map((item) => (
             <CardApi key={item.id} {...item} handleClick={this.handleClick}></CardApi>
