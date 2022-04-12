@@ -5,6 +5,7 @@ import Modal from '../component/Modal/Modal';
 import { IDataApi } from '../types';
 import searchData from '../utils';
 import Portal from '../component/Portal/Portal';
+import ErrorMessage from '../component/ErrorMessage/ErrorMessage';
 
 interface MainState {
   isLoaded?: boolean;
@@ -28,11 +29,11 @@ class Main extends React.Component<MainState, MainState> {
     this.getAllItems = this.getAllItems.bind(this);
     this.setModalActive = this.setModalActive.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.onError = this.onError.bind(this);
   }
 
   async getAllItems() {
-    const results = await searchData('character');
-    Promise.resolve(results).then((res) => {
+    await searchData('character').then((res) => {
       const dataResults: IDataApi[] = res.results;
       const findData: IDataApi[] = [];
       dataResults.forEach((item) => {
@@ -45,11 +46,6 @@ class Main extends React.Component<MainState, MainState> {
           findData.push(item);
           this.setState({
             isLoaded: true,
-            items: findData,
-          });
-        } else {
-          this.setState({
-            isLoaded: false,
             items: findData,
           });
         }
@@ -71,7 +67,7 @@ class Main extends React.Component<MainState, MainState> {
     this.setModalActive();
   }
   render() {
-
+      const errorMessage = this.state.error ? <ErrorMessage /> : null;
       return (
         <div className="main">
           <h1>Main Page</h1>
@@ -79,6 +75,7 @@ class Main extends React.Component<MainState, MainState> {
             <SearchPanel onSearchData={this.getAllItems} />
           </div>
           <div className="card-block" id="card-block" data-testid="card">
+            {errorMessage}
             {(this.state.items as Array<IDataApi>).map((item) => (
               <CardApi key={item.id} {...item} handleClick={this.handleClick}></CardApi>
             ))}

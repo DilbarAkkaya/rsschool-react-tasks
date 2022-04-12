@@ -1,11 +1,14 @@
 import React from "react";
 import img from './error.gif';
-import './modal';
+import './error.css';
 
-const ErrorMessage = () => {
-  return (
-    <img src={img} alt=""/>
-  )
+class ErrorMessage extends React.Component {
+  render(){
+    return (
+  
+      <img src={img} alt=""/>
+    )
+  }
 }
 
 export default ErrorMessage;
