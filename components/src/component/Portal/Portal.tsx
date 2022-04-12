@@ -1,7 +1,7 @@
-import React from "react";
-import ReactDom from "react-dom";
+import React from 'react';
+import ReactDom from 'react-dom';
 
-class Portal extends React.Component{
+class Portal extends React.Component {
   el = document.createElement('div');
   componentDidMount() {
     document.body.appendChild(this.el);

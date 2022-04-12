@@ -6,6 +6,7 @@ import { IDataApi } from '../types';
 import searchData from '../utils';
 import Portal from '../component/Portal/Portal';
 import ErrorMessage from '../component/ErrorMessage/ErrorMessage';
+import Spinner from '../component/Spinner/Spinner';
 
 interface MainState {
   isLoaded?: boolean;
@@ -33,59 +34,61 @@ class Main extends React.Component<MainState, MainState> {
   }
 
   async getAllItems() {
-    await searchData('character').then((res) => {
-      const dataResults: IDataApi[] = res.results;
-      const findData: IDataApi[] = [];
-      dataResults.forEach((item) => {
-        if (
-          item.name
-            .toLowerCase()
-            .trim()
-            .includes(`${localStorage.getItem('searchItem')?.toLowerCase()}`)
-        ) {
-          findData.push(item);
-          this.setState({
-            isLoaded: true,
-            items: findData,
-          });
-        }
-      });
-    }).catch(this.onError)
+    await searchData('character')
+      .then((res) => {
+        const dataResults: IDataApi[] = res.results;
+        const findData: IDataApi[] = [];
+        dataResults.forEach((item) => {
+          if (
+            item.name
+              .toLowerCase()
+              .trim()
+              .includes(`${localStorage.getItem('searchItem')?.toLowerCase()}`)
+          ) {
+            findData.push(item);
+            this.setState({ isLoaded: true, items: findData });
+          }
+        });
+      })
+      .catch(this.onError);
   }
 
-  onError(){
-    this.setState({isLoaded: false, error: true})
+  onError() {
+    this.setState({ isLoaded: false, error: true });
   }
   setModalActive() {
-    this.setState({ activeModal: !this.state.activeModal })
+    this.setState({ activeModal: !this.state.activeModal });
   }
 
   handleClick(id: number) {
-    const findCard = this.state.items?.find(el => el.id === id)
+    const findCard = this.state.items?.find((el) => el.id === id);
 
-    this.setState({ selectedCard: findCard })
+    this.setState({ selectedCard: findCard });
     this.setModalActive();
   }
   render() {
-      const errorMessage = this.state.error ? <ErrorMessage /> : null;
-      return (
-        <div className="main">
-          <h1>Main Page</h1>
-          <div className="search-panel">
-            <SearchPanel onSearchData={this.getAllItems} />
-          </div>
-          <div className="card-block" id="card-block" data-testid="card">
-            {errorMessage}
-            {(this.state.items as Array<IDataApi>).map((item) => (
-              <CardApi key={item.id} {...item} handleClick={this.handleClick}></CardApi>
-            ))}
-            <Portal>
-              <Modal active={this.state.activeModal} setActive={this.setModalActive} selectedCard={this.state.selectedCard}>
-              </Modal>
-            </Portal>
-          </div>
+    const errorMessage = this.state.error ? <ErrorMessage /> : null;
+    return (
+      <div className="main">
+        <h1>Main Page</h1>
+        <div className="search-panel">
+          <SearchPanel onSearchData={this.getAllItems} />
         </div>
-      );
+        <div className="card-block" id="card-block" data-testid="card">
+          {errorMessage}
+          {(this.state.items as Array<IDataApi>).map((item) => (
+            <CardApi key={item.id} {...item} handleClick={this.handleClick}></CardApi>
+          ))}
+          <Portal>
+            <Modal
+              active={this.state.activeModal}
+              setActive={this.setModalActive}
+              selectedCard={this.state.selectedCard}
+            />
+          </Portal>
+        </div>
+      </div>
+    );
   }
 }
 

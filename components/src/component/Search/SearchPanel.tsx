@@ -16,7 +16,7 @@ class SearchPanel extends React.Component<MyProps, MyState> {
 
   handleChange(event: ChangeEvent<HTMLInputElement>) {
     this.setState({ value: event.target.value });
-    localStorage.setItem('searchItem', this.state.value);
+    localStorage.setItem('searchItem', event.target.value);
   }
 
   componentDidMount() {

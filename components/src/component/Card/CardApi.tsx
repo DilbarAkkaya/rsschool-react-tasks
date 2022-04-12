@@ -1,5 +1,5 @@
 import React from 'react';
-import { IDataApi, SelectedProps } from '../../types';
+import { IDataApi } from '../../types';
 import './card.css';
 
 interface cardApiProps extends IDataApi {
@@ -9,12 +9,12 @@ class CardApi extends React.Component<cardApiProps> {
   constructor(props: cardApiProps) {
     super(props);
 
-    this.handleCard = this.handleCard.bind(this)
+    this.handleCard = this.handleCard.bind(this);
   }
 
-handleCard(){
-  this.props.handleClick(this.props.id);
-}
+  handleCard() {
+    this.props.handleClick(this.props.id);
+  }
   render() {
     return (
       <div className="card" onClick={this.handleCard}>
@@ -29,19 +29,10 @@ handleCard(){
             Species:
             <span>{this.props.species}</span>
           </p>
-{/*           <p>
-            Type:
-            <span>{this.props.type}</span>
-          </p> */}
           <p>
             Gender:
             <span>{this.props.gender}</span>
           </p>
-{/*           <ul>
-            Episode:
-            <li>{this.props.episode[0]}</li>
-            <li>{this.props.episode[1]}</li>
-          </ul> */}
         </div>
       </div>
     );

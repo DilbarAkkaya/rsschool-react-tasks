@@ -1,15 +1,13 @@
-
 import React from 'react';
-import Portal from '../Portal/Portal';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import './Modal.css';
 import { IDataApi } from '../../types';
+import './Modal.css';
 
 interface ModalProps {
-  active?: boolean,
-  setActive: (value: boolean) => void,
-  selectedCard?: IDataApi | null
+  active?: boolean;
+  setActive: (value: boolean) => void;
+  selectedCard?: IDataApi | null;
 }
 
 class Modal extends React.Component<ModalProps, any> {
@@ -17,7 +15,7 @@ class Modal extends React.Component<ModalProps, any> {
     super(props);
     this.state = {
       active: false,
-    }
+    };
     this.setActive = this.setActive.bind(this);
   }
 
@@ -26,9 +24,9 @@ class Modal extends React.Component<ModalProps, any> {
   }
   render() {
     return (
-      <div className={this.props.active ? "modal active" : "modal"} onClick={this.setActive}>
+      <div className={this.props.active ? 'modal active' : 'modal'} onClick={this.setActive}>
         <FontAwesomeIcon icon={faXmark} className="modal__close-button" onClick={this.setActive} />
-        <div className="modal__content" onClick={e => e.stopPropagation()}>
+        <div className="modal__content" onClick={(e) => e.stopPropagation()}>
           <h2>{this.props.selectedCard?.name}</h2>
           <img src={this.props.selectedCard?.image} alt="toy" className="card-img" />
           <div className="card-descr">
@@ -66,7 +64,7 @@ class Modal extends React.Component<ModalProps, any> {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
