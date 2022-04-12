@@ -1,3 +1,5 @@
+import { PATH_URL } from './constants/constants';
+
 export async function getData(url: string) {
   const res = await fetch(url);
   if (!res.ok) {
@@ -8,5 +10,5 @@ export async function getData(url: string) {
 }
 
 export default function searchData(param: string) {
-  return getData(`https://rickandmortyapi.com/api/${param}`);
+  return getData(`${PATH_URL}${param}`);
 }
