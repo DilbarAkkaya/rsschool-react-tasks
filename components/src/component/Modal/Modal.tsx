@@ -10,7 +10,7 @@ interface ModalProps {
   selectedCard?: IDataApi | null;
 }
 
-class Modal extends React.Component<ModalProps, any> {
+class Modal extends React.Component<ModalProps, { active: boolean }> {
   constructor(props: ModalProps) {
     super(props);
     this.state = {

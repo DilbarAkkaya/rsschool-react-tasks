@@ -61,8 +61,8 @@ export interface IDataApi {
   gender: string,
   image: string,
   origin: {
-    name: string,
-    url:string,
+  name: string,
+  url:string,
   }
   episode: string,
   location: {
