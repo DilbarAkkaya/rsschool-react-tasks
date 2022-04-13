@@ -1,7 +1,44 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { MyState, MyProps } from '../../types';
 import './search.css';
 
+const SearchPanel  = (props: MyProps) => {
+ const [value, setValue] = useState('');
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    setValue(event.target.value);
+    localStorage.setItem('searchItem', event.target.value);
+  }
+
+  useEffect(()=>{
+    setValue( localStorage.getItem('searchItem') as string )
+    return ()=> {
+      localStorage.setItem('searchItem', value);
+    }
+  }, []);
+
+
+  function keyPressHandler(event: React.KeyboardEvent) {
+    if (event.key === 'Enter') {
+     props.onSearchData(value);
+    }
+  }
+
+    return (
+      <input
+        type="text"
+        className="search-input"
+        placeholder="Search..."
+        value={value}
+        onChange={handleChange}
+        onKeyPress={keyPressHandler}
+      />
+    );
+  }
+
+export default SearchPanel;
+
+/* 
 class SearchPanel extends React.Component<MyProps, MyState> {
   constructor(props: MyProps) {
     super(props);
@@ -47,4 +84,4 @@ class SearchPanel extends React.Component<MyProps, MyState> {
   }
 }
 
-export default SearchPanel;
+export default SearchPanel; */
