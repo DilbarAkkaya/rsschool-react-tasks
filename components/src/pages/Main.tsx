@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import SearchPanel from '../component/Search/SearchPanel';
 import CardApi from '../component/Card/CardApi';
 import Modal from '../component/Modal/Modal';
@@ -30,10 +30,10 @@ const Main = () => {
                 .includes(`${localStorage.getItem('searchItem')?.toLowerCase()}`)
             ) {
               findData = [...findData, item];
-              console.log('after setItems', findData)
+              console.log('after setItems', findData);
             }
             setItems(findData);
-            setLoaded(false)
+            setLoaded(false);
           });
         }, 1000);
       })
@@ -55,13 +55,10 @@ const Main = () => {
     setModalActive();
   }
 
-
   const errorMessage = error ? <ErrorMessage /> : null;
   const spinner = isLoaded ? <Spinner /> : null;
   const listOfCards = (items as Array<IDataApi>).map((item) => {
-    return (
-      <CardApi key={item.id} {...item} handleClick={handleClick}></CardApi>
-    )
+    return <CardApi key={item.id} {...item} handleClick={handleClick}></CardApi>;
   });
   return (
     <div className="main">
@@ -74,15 +71,11 @@ const Main = () => {
         {errorMessage}
         {listOfCards}
         <Portal>
-          <Modal
-            active={activeModal}
-            setActive={setModalActive}
-            selectedCard={selectedCard}
-          />
+          <Modal active={activeModal} setActive={setModalActive} selectedCard={selectedCard} />
         </Portal>
       </div>
     </div>
   );
-}
+};
 
 export default Main;
