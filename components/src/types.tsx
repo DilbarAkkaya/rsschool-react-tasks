@@ -30,6 +30,7 @@ export type StateIsDraw = {
   genderError: boolean,
   fileError: boolean,
   buttonDisabled: boolean,
+  cards: Card[]
 }
 
 export type FormProps = {
@@ -48,8 +49,17 @@ export interface IDataForm {
   married?: string | boolean,
   gender?: string,
   file?: string,
+  
 }
-
+export type Card = {
+  num?: string,
+  name?: string,
+  date?: string,
+  position?: string,
+  married?: string | boolean,
+  gender?: string,
+  file?: string,
+}
 export type FileProps = { refInput?: React.RefObject<HTMLInputElement> };
 
 export type disableType = {

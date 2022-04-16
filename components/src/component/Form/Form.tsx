@@ -3,6 +3,7 @@ import { MyType, StateIsDraw } from '../../types';
 import FileInput from './FileInput';
 import FormCard from './FormCard';
 import './form.css';
+import Card from '../Card/Card';
 
 class Form extends React.Component<MyType, StateIsDraw> {
   inputName: React.RefObject<HTMLInputElement>;
@@ -13,6 +14,7 @@ class Form extends React.Component<MyType, StateIsDraw> {
   radioWoman: React.RefObject<HTMLInputElement>;
   fileInput: React.RefObject<HTMLInputElement>;
   formRef: React.RefObject<HTMLFormElement>;
+  cards: any;
 
   constructor(props: MyType) {
     super(props);
@@ -25,10 +27,12 @@ class Form extends React.Component<MyType, StateIsDraw> {
       genderError: false,
       fileError: false,
       buttonDisabled: true,
+      cards: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.validate = this.validate.bind(this);
     this.getFile = this.getFile.bind(this);
+    this.createNewCard = this.createNewCard.bind(this);
     this.inputName = React.createRef();
     this.inputDate = React.createRef();
     this.selectPosition = React.createRef();
@@ -62,8 +66,14 @@ class Form extends React.Component<MyType, StateIsDraw> {
     event.preventDefault();
     this.setState({ isDrawPicture: true });
     this.getFile();
+    this.createNewCard({name: this.inputName.current?.value,
+      file:this.fileInput.current?.src,
+      date:this.inputDate.current?.value,
+      position:this.selectPosition.current?.value,
+      married: this.checkMarried(),
+      gender: this.selectGender(),
+    })
   }
-
   selectGender() {
     return this.radioMan.current?.checked
       ? this.radioMan.current?.defaultValue
@@ -80,6 +90,9 @@ class Form extends React.Component<MyType, StateIsDraw> {
       ? (this.fileInput.current.src = a)
       : this.setState({ fileError: true });
   }
+createNewCard(card: any){
+  this.setState({cards: [...this.state.cards, card] })
+}
 
   render() {
     return (
@@ -171,14 +184,9 @@ class Form extends React.Component<MyType, StateIsDraw> {
           <input type="submit" value="Submit" disabled={this.state.buttonDisabled} />
         </form>
         {this.state.isDrawPicture && (
-          <FormCard
-            name={this.inputName.current?.value}
-            file={this.fileInput.current?.src}
-            date={this.inputDate.current?.value}
-            position={this.selectPosition.current?.value}
-            married={this.checkMarried()}
-            gender={this.selectGender()}
-          />
+          this.cards.map((item: Card, i: number)=> (
+            <FormCard key={i} card={item}/>
+          ))
         )}
       </>
     );

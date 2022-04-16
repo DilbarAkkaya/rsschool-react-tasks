@@ -11,7 +11,7 @@ interface ModalProps {
 }
 
 const Modal = (props: ModalProps) => {
-  const [active, setPopapActive] = useState(false);
+  const [active] = useState(false);
 
   function setActive() {
     props.setActive(active);

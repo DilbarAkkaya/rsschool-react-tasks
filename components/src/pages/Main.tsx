@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SearchPanel from '../component/Search/SearchPanel';
 import CardApi from '../component/Card/CardApi';
 import Modal from '../component/Modal/Modal';
@@ -8,25 +8,107 @@ import Portal from '../component/Portal/Portal';
 import ErrorMessage from '../component/ErrorMessage/ErrorMessage';
 import Spinner from '../component/Spinner/Spinner';
 
-interface MainState {
+/* interface MainState {
   isLoaded?: boolean;
   items?: Array<IDataApi>;
   error?: boolean;
   activeModal?: boolean;
   selectedCard?: IDataApi | null;
   onClick?: React.MouseEventHandler<HTMLElement>;
+  click?: boolean;
+} */
+
+
+const Main = () => {
+  const [isLoaded, setLoaded] = useState(false);
+  const [items, setItems] = useState<IDataApi[]>([]);
+  const [error, setError] = useState(false);
+  const [activeModal, setActiveModal] = useState(false);
+  const [selectedCard, setSelectedCard] = useState<IDataApi | null>(null);
+
+  async function getAllItems() {
+    await searchData('character')
+      .then((res) => {
+        setLoaded(true);
+        const dataResults: IDataApi[] = res.results;
+        let findData: IDataApi[] = [];
+        setTimeout(() => {
+          dataResults.forEach((item) => {
+            if (
+              item.name
+                .toLowerCase()
+                .trim()
+                .includes(`${localStorage.getItem('searchItem')?.toLowerCase()}`)
+            ) {
+              findData = [...findData, item];
+              console.log('after setItems', findData)
+            }
+            setItems(findData);
+            setLoaded(false)
+          });
+        }, 1000);
+      })
+      .catch(onError);
+  }
+
+  function onError() {
+    setLoaded(false);
+    setError(true);
+  }
+
+  function setModalActive() {
+    setActiveModal(!activeModal);
+  }
+
+  function handleClick(id: number) {
+    const findCard = items?.find((el) => el.id === id) as IDataApi;
+    setSelectedCard(findCard);
+    setModalActive();
+  }
+
+
+  const errorMessage = error ? <ErrorMessage /> : null;
+  const spinner = isLoaded ? <Spinner /> : null;
+  const listOfCards = (items as Array<IDataApi>).map((item) => {
+    return (
+      <CardApi key={item.id} {...item} handleClick={handleClick}></CardApi>
+    )
+  });
+  return (
+    <div className="main">
+      <h1>Main Page</h1>
+      <div className="search-panel">
+        <SearchPanel onSearchData={getAllItems} />
+      </div>
+      {spinner}
+      <div className="card-block" id="card-block" data-testid="card">
+        {errorMessage}
+        {listOfCards}
+        <Portal>
+          <Modal
+            active={activeModal}
+            setActive={setModalActive}
+            selectedCard={selectedCard}
+          />
+        </Portal>
+      </div>
+    </div>
+  );
 }
 
+export default Main;
 
-const Main =() => {
- const [isLoaded, setIsLoaded] = useState(false);
- const [items, setItems] = useState<IDataApi[]>([]);
- const [error, setError] = useState(false);
- const [activeModal, setActiveModal] = useState(false);
- const [selectedCard, setSelectedCard] = useState<IDataApi|null>(null);
 
-async function getAllItems() {
-    await searchData('character')
+/* const Main = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [items, setItems] = useState<IDataApi[]>([]);
+  const [error, setError] = useState(false);
+  const [activeModal, setActiveModal] = useState(false);
+  const [selectedCard, setSelectedCard] = useState<IDataApi | null>(null);
+  const [click, setClick] = useState(true);
+
+    useEffect(()=> {
+      searchData('character')
       .then((res) => {
         setIsLoaded(true)
         const dataResults: IDataApi[] = res.results;
@@ -40,60 +122,69 @@ async function getAllItems() {
                 .includes(`${localStorage.getItem('searchItem')?.toLowerCase()}`)
             ) {
               findData.push(item);
-              setIsLoaded(false),
-              setItems(findData);
-             // console.log("state", findData[0])
+              setIsLoaded(false);
+              saveState(findData);
+              console.log("state", item)
             }
           });
         }, 1000);
       })
       .catch(onError);
-  }
+  }, [])
 
+function saveState(arr:IDataApi[]){
+  setItems(items => arr)
+}
+  
   function onError() {
-    setIsLoaded(false), 
-    setError(true);
+    setIsLoaded(false),
+      setError(true);
   }
 
   function setModalActive() {
-   setActiveModal(!activeModal);
+    setActiveModal(activeModal => !activeModal);
   }
 
   function handleClick(id: number) {
     const findCard = items?.find((el) => el.id === id) as IDataApi;
     setSelectedCard(findCard);
-    console.log("o", findCard)
     setModalActive();
   }
-    const errorMessage = error ? <ErrorMessage /> : null;
-    const spinner = isLoaded ? <Spinner /> : null;
 
-    return (
-      <div className="main">
-        <h1>Main Page</h1>
-        <div className="search-panel">
-          <SearchPanel onSearchData={getAllItems} />
-        </div>
-        {spinner}
-        <div className="card-block" id="card-block" data-testid="card">
-          {errorMessage}
-          {(items as Array<IDataApi>).map((item) => (
-          //  console.log("okkkkk", items),
-            <CardApi key={item.id} {...item} handleClick={handleClick}></CardApi>
-          ))}
-          <Portal>
-            <Modal
-              active={activeModal}
-              setActive={setModalActive}
-              selectedCard={selectedCard}
-            />
-          </Portal>
-        </div>
-      </div>
-    );
+  function clickSearch(){
+    setClick(()=> !click)
+    console.log(click)
   }
+  const errorMessage = error ? <ErrorMessage /> : null;
+  const spinner = isLoaded ? <Spinner /> : null;
+  const listOfCards = items.map((item) => (
+    console.log(item),
+    <CardApi key={item.id} {...item} handleClick={handleClick} />
+  ));
 
-export default Main;
+  return (
+    <div className="main">
+      <h1>Main Page</h1>
+      <div className="search-panel">
+        <SearchPanel onSearchData={clickSearch} />
+      </div>
+      {spinner}
+      <div className="card-block" id="card-block" data-testid="card">
+      {errorMessage}
+      {listOfCards}
+        <Portal>
+          <Modal
+            active={activeModal}
+            setActive={setModalActive}
+            selectedCard={selectedCard}
+          />
+        </Portal>
+      </div>
+    </div>
+  );
+}
+
+export default Main; */
 
 /* class Main extends React.Component<MainState, MainState> {
   constructor(props: MainState) {
@@ -179,3 +270,4 @@ export default Main;
 
 export default Main;
  */
+

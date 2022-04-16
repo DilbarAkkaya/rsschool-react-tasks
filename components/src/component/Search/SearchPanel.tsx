@@ -1,9 +1,11 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { MyState, MyProps } from '../../types';
 import './search.css';
 
 const SearchPanel  = (props: MyProps) => {
- const [value, setValue] = useState('');
+ const [value, setValue] = useState( localStorage.getItem('searchItem')|| '');
+ const valueRef = useRef(value);
+ valueRef.current = value;
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setValue(event.target.value);
@@ -11,16 +13,17 @@ const SearchPanel  = (props: MyProps) => {
   }
 
   useEffect(()=>{
-    setValue( localStorage.getItem('searchItem') as string )
-    return ()=> {
-      localStorage.setItem('searchItem', value);
+    
+    return (()=> {
+      //console.log(value)
+      localStorage.setItem('searchItem', valueRef.current);
     }
-  }, []);
+  )},[]);
 
 
   function keyPressHandler(event: React.KeyboardEvent) {
     if (event.key === 'Enter') {
-     props.onSearchData(value);
+     props.onSearchData(valueRef.current);
     }
   }
 

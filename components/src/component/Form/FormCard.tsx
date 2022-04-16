@@ -1,8 +1,8 @@
 import React from 'react';
-import { IDataForm } from '../../types';
+import { Card } from '../../types';
 
-class FormCard extends React.Component<IDataForm> {
-  constructor(props: IDataForm) {
+class FormCard extends React.Component<Card> {
+  constructor(props: Card) {
     super(props);
   }
 
