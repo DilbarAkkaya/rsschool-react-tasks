@@ -186,12 +186,14 @@ createNewCard(card: TypeFormCard){
           </FileInput>
           <input type="submit" value="Submit" disabled={this.state.buttonDisabled} />
         </form>
-        
+        <div className="wrapper">
         {this.state.isDrawPicture && 
          (this.state.cards as Array<TypeFormCard>).map((item, i: number)=> (
             <FormCard key={i} {...item}/>
           )
         )}
+        </div>
+ 
       </>
     );
   }

@@ -52,3 +52,8 @@
   display: block;
   border: #212529;
 }
+.wrapper{
+  display: flex;
+  margin: 0 auto;
+  padding: 0 40px;
+}
