@@ -30,7 +30,7 @@ export type StateIsDraw = {
   genderError: boolean,
   fileError: boolean,
   buttonDisabled: boolean,
-  cards: Card[]
+  cards: TypeFormCard[]
 }
 
 export type FormProps = {
@@ -51,7 +51,7 @@ export interface IDataForm {
   file?: string,
   
 }
-export type Card = {
+export type TypeFormCard = {
   num?: string,
   name?: string,
   date?: string,

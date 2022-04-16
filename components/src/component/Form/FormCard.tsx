@@ -1,8 +1,8 @@
 import React from 'react';
-import { Card } from '../../types';
+import { TypeFormCard } from '../../types';
 
-class FormCard extends React.Component<Card> {
-  constructor(props: Card) {
+class FormCard extends React.Component<TypeFormCard> {
+  constructor(props: TypeFormCard) {
     super(props);
   }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MyType, StateIsDraw } from '../../types';
+import { MyType, StateIsDraw, TypeFormCard } from '../../types';
 import FileInput from './FileInput';
 import FormCard from './FormCard';
 import './form.css';
@@ -14,7 +14,7 @@ class Form extends React.Component<MyType, StateIsDraw> {
   radioWoman: React.RefObject<HTMLInputElement>;
   fileInput: React.RefObject<HTMLInputElement>;
   formRef: React.RefObject<HTMLFormElement>;
-  cards: any;
+  cards?: Array<TypeFormCard>;
 
   constructor(props: MyType) {
     super(props);
@@ -66,13 +66,16 @@ class Form extends React.Component<MyType, StateIsDraw> {
     event.preventDefault();
     this.setState({ isDrawPicture: true });
     this.getFile();
-    this.createNewCard({name: this.inputName.current?.value,
+    console.log(this.state.cards)
+    this.createNewCard({
+      name: this.inputName.current?.value,
       file:this.fileInput.current?.src,
       date:this.inputDate.current?.value,
       position:this.selectPosition.current?.value,
       married: this.checkMarried(),
       gender: this.selectGender(),
     })
+    console.log('ok')
   }
   selectGender() {
     return this.radioMan.current?.checked
@@ -90,7 +93,7 @@ class Form extends React.Component<MyType, StateIsDraw> {
       ? (this.fileInput.current.src = a)
       : this.setState({ fileError: true });
   }
-createNewCard(card: any){
+createNewCard(card: TypeFormCard){
   this.setState({cards: [...this.state.cards, card] })
 }
 
@@ -183,10 +186,11 @@ createNewCard(card: any){
           </FileInput>
           <input type="submit" value="Submit" disabled={this.state.buttonDisabled} />
         </form>
-        {this.state.isDrawPicture && (
-          this.cards.map((item: Card, i: number)=> (
-            <FormCard key={i} card={item}/>
-          ))
+        
+        {this.state.isDrawPicture && 
+         (this.state.cards as Array<TypeFormCard>).map((item, i: number)=> (
+            <FormCard key={i} {...item}/>
+          )
         )}
       </>
     );
