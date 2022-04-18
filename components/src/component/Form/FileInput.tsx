@@ -1,7 +1,25 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { FileProps } from '../../types';
+import {useForm} from 'react-hook-form';
 
-class FileInput extends React.Component<FileProps> {
+const FileInput = (props: FileProps) => {
+ 
+    const {refInput} = props;
+   // const refff = refInput.current.focus()
+    return (
+      <>
+        <label className="text-field__label" htmlFor="file">
+          Upload file:
+        </label>
+        <input id="file" type="file" {...refInput} className="text-field__label" />
+      </>
+    );
+  }
+
+export default FileInput; 
+
+
+/* class FileInput extends React.Component<FileProps> {
   constructor(props: FileProps) {
     super(props);
     this.state = {
@@ -22,4 +40,4 @@ class FileInput extends React.Component<FileProps> {
   }
 }
 
-export default FileInput;
+export default FileInput;  */

@@ -60,7 +60,7 @@ export type TypeFormCard = {
   gender?: string,
   file?: string,
 }
-export type FileProps = { refInput?: React.RefObject<HTMLInputElement> };
+export type FileProps = { refInput: React.RefObject<HTMLInputElement> };
 
 export type disableType = {
   buttonDisabled: boolean,
