@@ -10,9 +10,9 @@ import './form.css';
 const Form = () => {
   const { register, handleSubmit, formState: { errors }, getValues } = useForm();
   const [cards, setCards] = useState<TypeFormCard[]>([]);
-  const [valueName, setValue] = useState('');
-  const valueRef = useRef(valueName);
-  valueRef.current = valueName;
+ // const [valueName, setValue] = useState('');
+  //const valueRef = useRef(valueName);
+ // valueRef.current = valueName;
 
   function createNewCard(card: TypeFormCard) {
     setCards([...cards, card])
@@ -25,7 +25,7 @@ const Form = () => {
       date: getValues().date,
       position: getValues().position,
       // married: this.checkMarried(),
-      // gender: this.selectGender(),
+      gender: getValues().gender,
     })
     console.log('okkkk')
     return data
