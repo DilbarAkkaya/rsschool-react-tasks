@@ -8,7 +8,7 @@ import './form.css';
 
 
 const Form = () => {
-  const { register, handleSubmit, formState: { errors }, getValues } = useForm();
+  const { register, handleSubmit, formState: { errors }, getValues, reset } = useForm();
   const [cards, setCards] = useState<TypeFormCard[]>([]);
  // const [valueName, setValue] = useState('');
   //const valueRef = useRef(valueName);
@@ -34,7 +34,8 @@ const Form = () => {
       married: checkMarried()
     })
     console.log(getValues())
-    return data
+    reset()
+    //return data
   }
   return (
 
@@ -61,7 +62,7 @@ const Form = () => {
               required: 'Invalid date',
             })}
             type="date"
-            defaultValue="Birthday"
+            //defaultValue="Birthday"
           />
           {errors.date && <div className="error">{errors.date.message}</div>}
           <label className="text-field__label" htmlFor="position">
