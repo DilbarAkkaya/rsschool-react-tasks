@@ -18,7 +18,12 @@ const Form = () => {
     setCards([...cards, card])
   }
 
-  const onSubmit = (data: any) => {
+  function checkMarried() {
+    return getValues().married ? 'YES' : 'NO';
+  }
+  
+  const onSubmit = (data: any, event?: React.BaseSyntheticEvent) => {
+    event?.preventDefault();
     createNewCard({
       name: getValues().name,
       //file:this.fileInput.current?.src,
@@ -26,8 +31,9 @@ const Form = () => {
       position: getValues().position,
       // married: this.checkMarried(),
       gender: getValues().gender,
+      married: checkMarried()
     })
-    console.log('okkkk')
+    console.log(getValues())
     return data
   }
   return (
@@ -82,11 +88,12 @@ const Form = () => {
             Married:
           </label>
           <input
+            {...register('married')}
             id="marry"
             type="checkbox"
             name="married"
             defaultChecked
-          //defaultValue={this.checkMarried()}
+           // defaultValue={checkMarried()}
           />
           <label className="text-field__label">
             Gender:
