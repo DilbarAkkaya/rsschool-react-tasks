@@ -8,11 +8,8 @@ import './form.css';
 
 
 const Form = () => {
-  const { register, handleSubmit, formState: { errors }, getValues, reset } = useForm();
+  const { register, handleSubmit, formState: { errors, isDirty}, getValues, reset } = useForm();
   const [cards, setCards] = useState<TypeFormCard[]>([]);
- // const [valueName, setValue] = useState('');
-  //const valueRef = useRef(valueName);
- // valueRef.current = valueName;
 
   function createNewCard(card: TypeFormCard) {
     setCards([...cards, card])
@@ -21,21 +18,26 @@ const Form = () => {
   function checkMarried() {
     return getValues().married ? 'YES' : 'NO';
   }
-  
+
+  function getFile() { 
+   const a = URL.createObjectURL(getValues().picture[0] as Blob);
+  console.log(a)
+   getValues().picture[0].src = a
+  }
+
   const onSubmit = (data: any, event?: React.BaseSyntheticEvent) => {
     event?.preventDefault();
+    getFile();
+    console.log(data)
     createNewCard({
       name: getValues().name,
-      //file:this.fileInput.current?.src,
+      file: getValues().picture[0].src,
       date: getValues().date,
       position: getValues().position,
-      // married: this.checkMarried(),
       gender: getValues().gender,
       married: checkMarried()
     })
-    console.log(getValues())
-    reset()
-    //return data
+   // reset()
   }
   return (
 
@@ -121,14 +123,11 @@ const Form = () => {
             />
           </label>
         </div>
-        {/*         <FileInput 
-        //refInput={this.fileInput}
-        >
-          {
-          //this.state.fileError && <div className="error">choose file</div>
-        }
-        </FileInput> */}
-        <input type="submit" value="Submit" //disabled={this.state.buttonDisabled} 
+        <label className="text-field__label" htmlFor="file">
+          Upload file:
+        </label>
+        <input id="file" type="file" {...register('picture')} className="text-field__label" />
+        <input type="submit" value="Submit" disabled={!isDirty} 
         />
       </form>
       <div className="wrapper">
