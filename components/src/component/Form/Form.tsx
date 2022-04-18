@@ -1,26 +1,39 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { MyType, StateIsDraw, TypeFormCard } from '../../types';
 import FileInput from './FileInput';
 import FormCard from './FormCard';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useMemo, useRef } from 'react';
 import './form.css';
 
-const Form = () => {
-  const {register, handleSubmit, formState: {errors}} = useForm();
-  const [cards, setCards] = useState([]);
 
-  function createNewCard(card: TypeFormCard){
+const Form = () => {
+  const { register, handleSubmit, formState: { errors }, getValues } = useForm();
+  const [cards, setCards] = useState<TypeFormCard[]>([]);
+  const [valueName, setValue] = useState('');
+  const valueRef = useRef(valueName);
+  valueRef.current = valueName;
+
+  function createNewCard(card: TypeFormCard) {
     setCards([...cards, card])
-  } 
+  }
 
   const onSubmit = (data: any) => {
-        (data as Array<TypeFormCard>).map((item, i: number)=> (
-      <FormCard key={i} {...item}/>
-    )
-    )}
+    createNewCard({
+      name: getValues().name,
+      //file:this.fileInput.current?.src,
+      date: getValues().date,
+      position: getValues().position,
+      // married: this.checkMarried(),
+      // gender: this.selectGender(),
+    })
+    console.log('okkkk')
+    return data
+  }
   return (
+
     <>
-      <form  onSubmit={handleSubmit(onSubmit)} className="form-wrapper">
+      <form onSubmit={handleSubmit(onSubmit)} className="form-wrapper">
         <div className="text-field">
           <label className="text-field__label" htmlFor="name">
             Name of employer:
@@ -33,7 +46,7 @@ const Form = () => {
             defaultValue=""
             placeholder="Name"
           />
-         {errors.name && <div className="error">{errors.name.message}</div>}
+          {errors.name && <div className="error">{errors.name.message}</div>}
           <label className="text-field__label" htmlFor="date">
             Date of birthday:
           </label>
@@ -73,7 +86,7 @@ const Form = () => {
             type="checkbox"
             name="married"
             defaultChecked
-         //   defaultValue={this.checkMarried()}
+          //defaultValue={this.checkMarried()}
           />
           <label className="text-field__label">
             Gender:
@@ -81,7 +94,7 @@ const Form = () => {
               Man
             </label>
             <input
-            {...register('gender')}
+              {...register('gender')}
               id="man"
               type="radio"
               name="gender"
@@ -92,7 +105,7 @@ const Form = () => {
               Woman
             </label>
             <input
-            {...register('gender')}
+              {...register('gender')}
               id="woman"
               type="radio"
               name="gender"
@@ -100,7 +113,7 @@ const Form = () => {
             />
           </label>
         </div>
-{/*         <FileInput 
+        {/*         <FileInput 
         //refInput={this.fileInput}
         >
           {
@@ -111,10 +124,10 @@ const Form = () => {
         />
       </form>
       <div className="wrapper">
-      {(cards as Array<TypeFormCard>).map((item, i: number)=> (
+        {(cards as Array<TypeFormCard>).map((item, i: number)=> (
           <FormCard key={i} {...item}/>
-      ))}
-   </div>
+      ))} 
+      </div>
 
     </>
   );
