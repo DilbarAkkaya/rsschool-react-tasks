@@ -1,6 +1,8 @@
-export const PATH_MAIN = '/',
-  PATH_ABOUT = '/aboutus',
-  PATH_404 = '/404',
-  PATH_OTHER = '*',
-  PATH_FORM = '/form',
-  PATH_URL = 'https://rickandmortyapi.com/api/';
+export const PATH = {
+  MAIN: '/',
+  ABOUT: '/aboutus',
+  _404: '/404',
+  OTHER: '*',
+  FORM: '/form',
+  _URL: 'https://rickandmortyapi.com/api/',
+};
