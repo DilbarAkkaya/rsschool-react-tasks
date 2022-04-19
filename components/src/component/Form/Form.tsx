@@ -37,7 +37,7 @@ const Form = () => {
       gender: getValues().gender,
       married: checkMarried()
     })
-   // reset()
+   reset()
   }
   return (
 
