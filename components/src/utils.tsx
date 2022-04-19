@@ -1,4 +1,4 @@
-import { PATH_URL } from './constants/constants';
+import { PATH } from './constants/constants';
 
 export async function getData(url: string) {
   const res = await fetch(url);
@@ -10,5 +10,5 @@ export async function getData(url: string) {
 }
 
 export default function searchData(param: string) {
-  return getData(`${PATH_URL}${param}`);
+  return getData(`${PATH._URL}${param}`);
 }
