@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { FileProps } from '../../types';
 import {useForm} from 'react-hook-form';
 
-const FileInput = (props: FileProps) => {
+/* const FileInput = (props: FileProps) => {
  
    // const {refInput} = props;
    // const refff = refInput.current.focus()
@@ -16,19 +16,19 @@ const FileInput = (props: FileProps) => {
     );
   }
 
-export default FileInput; 
+export default FileInput;  */
 
-/* const FileInput = React.forwardRef((props, ref) => {
-  const {register, file, ...rest} = props;
+/* const FileInput = React.forwardRef(({register, ref}) => {
+ // const {register, ...props} = props;
       <>
         <label className="text-field__label" htmlFor="file">
           Upload file:
         </label>
-        <input id="file" type="file" ref={register} className="text-field__label" />
-      </>
+        <input id="file" type="file" register={register} ref={ref} className="text-field__label" />
+         </>
       }
 )
-export default FileInput;  */
+export default FileInput;   */
 /* class FileInput extends React.Component<FileProps> {
   constructor(props: FileProps) {
     super(props);

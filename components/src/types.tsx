@@ -37,8 +37,11 @@ export type FormProps = {
   name: string,
   date: Date,
   position: string,
-}
+} 
 
+export type FormSubmitProps = {
+  onSubmit?: any
+}
 export type MyType = Record<string, React.RefObject<HTMLInputElement>>;
 
 export interface IDataForm {
