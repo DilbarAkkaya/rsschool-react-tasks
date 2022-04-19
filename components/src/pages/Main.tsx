@@ -14,6 +14,11 @@ const Main = () => {
   const [error, setError] = useState(false);
   const [activeModal, setActiveModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState<IDataApi | null>(null);
+  const errorMessage = error ? <ErrorMessage /> : null;
+  const spinner = isLoaded ? <Spinner /> : null;
+  const listOfCards = (items as Array<IDataApi>).map((item) => {
+    return <CardApi key={item.id} {...item} handleClick={handleClick}></CardApi>;
+  });
 
   async function getAllItems() {
     await searchData('character')
@@ -54,11 +59,6 @@ const Main = () => {
     setModalActive();
   }
 
-  const errorMessage = error ? <ErrorMessage /> : null;
-  const spinner = isLoaded ? <Spinner /> : null;
-  const listOfCards = (items as Array<IDataApi>).map((item) => {
-    return <CardApi key={item.id} {...item} handleClick={handleClick}></CardApi>;
-  });
   return (
     <div className="main">
       <h1>Main Page</h1>
