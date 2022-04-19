@@ -30,7 +30,6 @@ const Main = () => {
                 .includes(`${localStorage.getItem('searchItem')?.toLowerCase()}`)
             ) {
               findData = [...findData, item];
-              console.log('after setItems', findData);
             }
             setItems(findData);
             setLoaded(false);

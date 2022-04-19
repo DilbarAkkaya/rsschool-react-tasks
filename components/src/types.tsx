@@ -37,11 +37,12 @@ export type FormProps = {
   name: string,
   date: Date,
   position: string,
-} 
+}
 
 export type FormSubmitProps = {
-  onSubmit?: any
+  onSubmit?: () => {},
 }
+
 export type MyType = Record<string, React.RefObject<HTMLInputElement>>;
 
 export interface IDataForm {
@@ -52,7 +53,7 @@ export interface IDataForm {
   married?: string | boolean,
   gender?: string,
   file?: string,
-  
+
 }
 export type TypeFormCard = {
   num?: string,

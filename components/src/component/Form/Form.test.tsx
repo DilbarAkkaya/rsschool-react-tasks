@@ -1,8 +1,6 @@
-import React from "react";
 import Form from "./Form";
-import {fireEvent, getByDisplayValue, getByTestId, screen, render} from '@testing-library/react';
+import {fireEvent, screen, render} from '@testing-library/react';
 import { act } from "react-dom/test-utils";
-import { SubmitHandler } from "react-hook-form";
 import userEvent from "@testing-library/user-event";
 
 describe('Form', ()=> {
