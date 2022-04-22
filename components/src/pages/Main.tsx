@@ -7,6 +7,9 @@ import searchData from '../utils';
 import Portal from '../component/Portal/Portal';
 import ErrorMessage from '../component/ErrorMessage/ErrorMessage';
 import Spinner from '../component/Spinner/Spinner';
+import Context from '../Context/Context';
+
+
 
 const Main = () => {
   const [isLoaded, setLoaded] = useState(false);
@@ -16,9 +19,7 @@ const Main = () => {
   const [selectedCard, setSelectedCard] = useState<IDataApi | null>(null);
   const errorMessage = error ? <ErrorMessage /> : null;
   const spinner = isLoaded ? <Spinner /> : null;
-  const listOfCards = (items as Array<IDataApi>).map((item) => {
-    return <CardApi key={item.id} {...item} handleClick={handleClick}></CardApi>;
-  });
+
 
   async function getAllItems() {
     await searchData('character')
@@ -63,12 +64,12 @@ const Main = () => {
     <div className="main">
       <h1>Main Page</h1>
       <div className="search-panel">
-        <SearchPanel onSearchData={getAllItems} />
+        <SearchPanel />
       </div>
       {spinner}
       <div className="card-block" id="card-block" data-testid="card">
+        
         {errorMessage}
-        {listOfCards}
         <Portal>
           <Modal active={activeModal} setActive={setModalActive} selectedCard={selectedCard} />
         </Portal>
