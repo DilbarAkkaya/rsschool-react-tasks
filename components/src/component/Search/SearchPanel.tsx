@@ -19,11 +19,13 @@ const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) =>{
   console.log("mbkjndlkvb")
      searchData('character')
       .then((res) => {
+        console.log(res)
         dispatch({
           type: 'addcards',
-          payload: res.results
+          payload: res.results[5]
         })
-
+        console.log(  res.results
+        )
       })
 }
   return (

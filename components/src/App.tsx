@@ -10,7 +10,10 @@ import './App.css';
 import SearchPanel from './component/Search/SearchPanel';
 import Context, { ActionTypes, ReduserState } from './Context/Context';
 
-const initialState = {inputSearch: ''};
+const initialState = {
+  inputSearch: '',
+  cards: [],
+};
 
 function reducer(state: ReduserState, action: ActionTypes) {
   switch (action.type) {

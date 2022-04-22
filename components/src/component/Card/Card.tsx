@@ -39,5 +39,3 @@ class Card extends React.Component<IDataOfToys> {
     );
   }
 }
-
-export default Card;
