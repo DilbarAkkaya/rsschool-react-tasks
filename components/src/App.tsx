@@ -13,6 +13,7 @@ import Context, { ActionTypes, ReduserState } from './Context/Context';
 const initialState = {
   inputSearch: '',
   cards: [],
+  
 };
 
 function reducer(state: ReduserState, action: ActionTypes) {
