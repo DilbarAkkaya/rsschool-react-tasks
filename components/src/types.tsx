@@ -82,7 +82,7 @@ export interface IDataApi {
     name: string,
     url: string,
   }
-  episode: string,
+  episode?: String[]
   location: {
     name: string,
     url: string,

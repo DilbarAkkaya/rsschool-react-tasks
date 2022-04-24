@@ -11,7 +11,9 @@ interface ModalProps {
 }
 
 const Modal = React.memo((props: ModalProps) => {
-  const { selectedCard, active, setActive } = props;
+  const { active, setActive } = props;
+  const { name, image, status, gender, type, species, location, episode, origin } =
+    (props.selectedCard as IDataApi) || {};
   const [open] = useState(false);
   const setClass = active ? 'modal active' : 'modal';
   const setOpen = () => {
@@ -22,39 +24,39 @@ const Modal = React.memo((props: ModalProps) => {
     <div className={setClass} onClick={setOpen}>
       <FontAwesomeIcon icon={faXmark} className="modal__close-button" onClick={setOpen} />
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
-        <h2>{selectedCard?.name}</h2>
-        <img src={selectedCard?.image} alt="toy" className="card-img" />
+        <h2>{name}</h2>
+        <img src={image} alt="toy" className="card-img" />
         <div className="card-descr">
           <p>
             Status:
-            <span>{selectedCard?.status}</span>
+            <span>{status}</span>
           </p>
           <p>
             Species:
-            <span>{selectedCard?.species}</span>
+            <span>{species}</span>
           </p>
           <p>
             Type:
-            <span>{selectedCard?.type}</span>
+            <span>{type}</span>
           </p>
           <p>
             Gender:
-            <span>{selectedCard?.gender}</span>
+            <span>{gender}</span>
           </p>
           <ul>
             Origin:
-            <li>{selectedCard?.origin.name}</li>
-            <li>{selectedCard?.origin.url}</li>
+            <li>{origin?.name}</li>
+            <li>{origin?.url}</li>
           </ul>
           <ul>
             Episode:
-            <li>{selectedCard?.episode[0]}</li>
-            <li>{selectedCard?.episode[1]}</li>
+            <li>{episode?.filter((_, i: number) => i === 0)}</li>
+            <li>{episode?.filter((_, i: number) => i === 1)}</li>
           </ul>
           <ul>
             Location:
-            <li>{selectedCard?.location.name}</li>
-            <li>{selectedCard?.location.url}</li>
+            <li>{location?.name}</li>
+            <li>{location?.url}</li>
           </ul>
         </div>
       </div>
