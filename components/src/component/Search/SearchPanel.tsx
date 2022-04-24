@@ -3,6 +3,7 @@ import { MyProps } from '../../types';
 import './search.css';
 
 const SearchPanel = (props: MyProps) => {
+  const { onSearchData } = props;
   const [value, setValue] = useState(localStorage.getItem('searchItem') || '');
   const valueRef = useRef(value);
   valueRef.current = value;
@@ -20,7 +21,7 @@ const SearchPanel = (props: MyProps) => {
 
   function keyPressHandler(event: React.KeyboardEvent) {
     if (event.key === 'Enter') {
-      props.onSearchData(valueRef.current);
+      onSearchData(valueRef.current);
     }
   }
 

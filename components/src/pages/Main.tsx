@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import SearchPanel from '../component/Search/SearchPanel';
 import CardApi from '../component/Card/CardApi';
 import Modal from '../component/Modal/Modal';
-import { IDataApi } from '../types';
+import { ApiTypes, IDataApi } from '../types';
 import searchData from '../utils';
 import Portal from '../component/Portal/Portal';
 import ErrorMessage from '../component/ErrorMessage/ErrorMessage';
@@ -16,13 +16,10 @@ const Main = () => {
   const [selectedCard, setSelectedCard] = useState<IDataApi | null>(null);
   const errorMessage = error ? <ErrorMessage /> : null;
   const spinner = isLoaded ? <Spinner /> : null;
-  const listOfCards = (items as Array<IDataApi>).map((item) => {
-    return <CardApi key={item.id} {...item} handleClick={handleClick}></CardApi>;
-  });
 
-  async function getAllItems() {
+  const getAllItems = useCallback(async function () {
     await searchData('character')
-      .then((res) => {
+      .then((res: ApiTypes) => {
         setLoaded(true);
         const dataResults: IDataApi[] = res.results;
         let findData: IDataApi[] = [];
@@ -42,23 +39,25 @@ const Main = () => {
         }, 1000);
       })
       .catch(onError);
-  }
+  }, []);
 
-  function onError() {
+  const onError = () => {
     setLoaded(false);
     setError(true);
-  }
+  };
 
-  function setModalActive() {
+  const setModalActive = useCallback(() => {
     setActiveModal(!activeModal);
-  }
+  }, [activeModal]);
 
-  function handleClick(id: number) {
+  const handleClick = (id: number) => {
     const findCard = items?.find((el) => el.id === id) as IDataApi;
     setSelectedCard(findCard);
     setModalActive();
-  }
-
+  };
+  const listOfCards = (items as Array<IDataApi>).map((item) => {
+    return <CardApi key={item.id} {...item} handleClick={handleClick}></CardApi>;
+  });
   return (
     <div className="main">
       <h1>Main Page</h1>

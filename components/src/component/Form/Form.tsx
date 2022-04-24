@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { FormSubmitProps, TypeFormCard } from '../../types';
+import { TypeFormCard } from '../../types';
 import FormCard from './FormCard';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import './form.css';
 
-const Form = (props: FormSubmitProps) => {
+const Form = () => {
   const {
     register,
     handleSubmit,
@@ -12,6 +12,7 @@ const Form = (props: FormSubmitProps) => {
     getValues,
     reset,
   } = useForm();
+
   const [cards, setCards] = useState<TypeFormCard[]>([]);
 
   function createNewCard(card: TypeFormCard) {
@@ -31,11 +32,11 @@ const Form = (props: FormSubmitProps) => {
     event?.preventDefault();
     getFile();
     createNewCard({
-      name: getValues().name,
+      name: data.name,
       file: getValues().picture[0].src,
-      date: getValues().date,
-      position: getValues().position,
-      gender: getValues().gender,
+      date: data.date,
+      position: data.position,
+      gender: data.gender,
       married: checkMarried(),
     });
     reset();

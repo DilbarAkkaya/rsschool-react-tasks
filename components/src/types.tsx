@@ -40,7 +40,7 @@ export type FormProps = {
 }
 
 export type FormSubmitProps = {
-  onSubmit?: () => {},
+  onSubmit?: () => {} | null,
 }
 
 export type MyType = Record<string, React.RefObject<HTMLInputElement>>;
@@ -91,4 +91,9 @@ export interface IDataApi {
 
 export type SelectedProps = {
   handleClick: (id: number | null) => void;
+}
+
+export type ApiTypes = {
+  info: {},
+  results: IDataApi[],
 }
