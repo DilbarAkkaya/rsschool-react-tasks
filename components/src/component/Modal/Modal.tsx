@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { IDataApi } from '../../types';
@@ -11,7 +11,7 @@ interface ModalProps {
   selectedCard?: IDataApi | null;
 }
 
-const Modal = (props: ModalProps) => {
+const Modal = React.memo((props: ModalProps) => {
   const {state, dispatch} =useContext(Context)
  // const [open] = useState(false);
 
@@ -64,6 +64,6 @@ const setOpen = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Modal;
