@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import SearchPanel from '../component/Search/SearchPanel';
 import CardApi from '../component/Card/CardApi';
 import Modal from '../component/Modal/Modal';
@@ -10,18 +10,19 @@ import Spinner from '../component/Spinner/Spinner';
 import Context from '../Context/Context';
 
 const Main = () => {
-  const handleClick = (id: number) => {
+  const { state, dispatch } = useContext(Context)
+  const handleClick = useCallback((id: number) => {
     const findCard = state.cards.find((el) => el.id === id) as IDataApi;
     setSelectedCard(findCard);
     setModalActive();
-  }
+  },[state.cards]);
 
-  const setModalActive = () => {
+  const setModalActive = useCallback(() => {
     dispatch({
       type: 'activemodal',
       payload: true
     })
-  }
+  },[])
 
   const [isLoaded, setLoaded] = useState(false);
   //const [items, setItems] = useState<IDataApi[]>([]);
@@ -30,7 +31,7 @@ const Main = () => {
   const [selectedCard, setSelectedCard] = useState<IDataApi | null>(null);
   const errorMessage = error ? <ErrorMessage /> : null;
   const spinner = isLoaded ? <Spinner /> : null;
-  const { state, dispatch } = useContext(Context)
+
   const listOfCards = (state.cards as Array<IDataApi>).map((item, i) => {
     return <CardApi key={item.id} {...item} handleClick={handleClick}></CardApi>;
   })

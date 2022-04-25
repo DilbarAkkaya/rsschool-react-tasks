@@ -31,11 +31,11 @@ const Form = () => {
     event?.preventDefault();
     getFile();
     createNewCard({
-      name: getValues().name,
+      name: data.name,
       file: getValues().picture[0].src,
-      date: getValues().date,
-      position: getValues().position,
-      gender: getValues().gender,
+      date: data.date,
+      position: data.position,
+      gender: data.gender,
       married: checkMarried(),
     });
     reset();
