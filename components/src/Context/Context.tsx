@@ -7,7 +7,8 @@ export type Context = {
 
 export type ReduserState = {
   inputSearch: string,
-  cards: IDataApi[]
+  cards: IDataApi[],
+  activeModal: boolean,
 }
 
 
@@ -17,12 +18,16 @@ export type ActionTypes  = |  {
 } | {
   type: 'addcards',
   payload: IDataApi
+} | {
+  type: 'activemodal',
+  payload: boolean
 }
 
 const Context = React.createContext<Context>({
   state: {
     inputSearch:'',
-    cards: []
+    cards: [],
+    activeModal: false,
   },
   dispatch: ()=> {}
 });

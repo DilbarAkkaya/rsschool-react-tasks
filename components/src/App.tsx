@@ -13,7 +13,7 @@ import Context, { ActionTypes, ReduserState } from './Context/Context';
 const initialState = {
   inputSearch: '',
   cards: [],
-  
+  activeModal: false,
 };
 
 function reducer(state: ReduserState, action: ActionTypes) {
@@ -22,6 +22,8 @@ function reducer(state: ReduserState, action: ActionTypes) {
       return {...state, inputSearch: action.payload};
       case 'addcards':
         return {...state, cards: [...state.cards,  action.payload]};
+        case 'activemodal':
+          return {...state, activeModal: action.payload};
     default:
       return state;
   }

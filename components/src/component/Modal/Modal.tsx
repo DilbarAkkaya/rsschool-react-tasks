@@ -1,25 +1,32 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { IDataApi } from '../../types';
+import Context from '../../Context/Context';
 import './Modal.css';
 
 interface ModalProps {
-  active?: boolean;
+  activeModal?: boolean;
   setActive: (value: boolean) => void;
   selectedCard?: IDataApi | null;
 }
 
 const Modal = (props: ModalProps) => {
-  const [active] = useState(false);
+  const {state, dispatch} =useContext(Context)
+  const [open] = useState(false);
 
-  function setActive() {
-    props.setActive(active);
-  }
+function setOpen() {
+console.log("ok")
+
+dispatch({
+  type: 'activemodal',
+  payload: false
+ })
+}
 
   return (
-    <div className={props.active ? 'modal active' : 'modal'} onClick={setActive}>
-      <FontAwesomeIcon icon={faXmark} className="modal__close-button" onClick={setActive} />
+    <div className={state.activeModal ? 'modal active' : 'modal'} onClick={setOpen}>
+      <FontAwesomeIcon icon={faXmark} className="modal__close-button" onClick={setOpen} />
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         <h2>{props.selectedCard?.name}</h2>
         <img src={props.selectedCard?.image} alt="toy" className="card-img" />

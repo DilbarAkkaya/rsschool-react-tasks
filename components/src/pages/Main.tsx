@@ -13,23 +13,32 @@ import { stat } from 'fs';
 
 
 const Main = () => {
-/*   function handleClick(id: number) {
+function handleClick(id: number) {
     const findCard = state.cards.find((el) => el.id === id) as IDataApi;
     console.log(findCard)
-    setSelectedCard(findCard);
-   setModalActive();
-  } */
+  setSelectedCard(findCard);
+  setModalActive();
+
+  }
+
+  
+  function setModalActive() {
+    dispatch({
+      type: 'activemodal',
+      payload: true
+     })
+  }
 
   const [isLoaded, setLoaded] = useState(false);
  //const [items, setItems] = useState<IDataApi[]>([]);
   const [error, setError] = useState(false);
  // const [activeModal, setActiveModal] = useState(false);
- // const [selectedCard, setSelectedCard] = useState<IDataApi | null>(null);
+ const [selectedCard, setSelectedCard] = useState<IDataApi | null>(null);
   const errorMessage = error ? <ErrorMessage /> : null;
   const spinner = isLoaded ? <Spinner /> : null;
   const {state, dispatch} = useContext(Context)
  const listOfCards = (state.cards as Array<IDataApi>).map((item,i) => {
-    return <CardApi key={item.id} {...item} ></CardApi>;
+    return <CardApi key={item.id} {...item} handleClick={handleClick}></CardApi>;
   })
 
   /* async function getAllItems() {
@@ -84,6 +93,9 @@ const Main = () => {
 {/*         <Portal>
           <Modal active={activeModal} setActive={setModalActive} selectedCard={selectedCard} />
         </Portal> */}
+         <Portal>
+          <Modal activeModal={state.activeModal} setActive={setModalActive} selectedCard={selectedCard}/>
+        </Portal> 
       </div>
     </div>
   );
