@@ -50,11 +50,14 @@ const Main = () => {
     setActiveModal(!activeModal);
   }, [activeModal]);
 
-  const handleClick = (id: number) => {
-    const findCard = items?.find((el) => el.id === id) as IDataApi;
-    setSelectedCard(findCard);
-    setModalActive();
-  };
+  const handleClick = useCallback(
+    (id: number) => {
+      const findCard = items?.find((el) => el.id === id) as IDataApi;
+      setSelectedCard(findCard);
+      setModalActive();
+    },
+    [setModalActive, items]
+  );
   const listOfCards = (items as Array<IDataApi>).map((item) => {
     return <CardApi key={item.id} {...item} handleClick={handleClick}></CardApi>;
   });
