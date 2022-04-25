@@ -12,7 +12,8 @@ interface ModalProps {
 }
 
 const Modal = React.memo((props: ModalProps) => {
-  const {state, dispatch} =useContext(Context)
+  const {state, dispatch} =useContext(Context);
+  const setClass = state.activeModal ? 'modal active' : 'modal';
  // const [open] = useState(false);
 
 const setOpen = () => {
@@ -23,7 +24,7 @@ const setOpen = () => {
 }
 
   return (
-    <div className={state.activeModal ? 'modal active' : 'modal'} onClick={setOpen}>
+    <div className={setClass} onClick={setOpen}>
       <FontAwesomeIcon icon={faXmark} className="modal__close-button" onClick={setOpen} />
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         <h2>{props.selectedCard?.name}</h2>
