@@ -8,7 +8,7 @@ import './search.css';
 const SearchPanel = () => {
   const { state, dispatch } = useContext(Context)
 
-  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: 'enter',
       payload: event.target.value

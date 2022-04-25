@@ -6,25 +6,26 @@ interface cardApiProps extends IDataApi {
 }
 
 const CardApi = (props: cardApiProps) => {
-  function handleCard() {
-    props.handleClick(props.id);
-  }
+  const { handleClick, id, image, name, status, species, gender } = props;
+  const handleCard = () => {
+    handleClick(id);
+  };
   return (
     <div className="card" onClick={handleCard}>
-      <h2 className="card-title">{props.name}</h2>
-      <img src={props.image} alt="toy" className="card-img" />
+      <h2 className="card-title">{name}</h2>
+      <img src={image} alt="toy" className="card-img" />
       <div className="card-descr">
         <p>
           Status:
-          <span>{props.status}</span>
+          <span>{status}</span>
         </p>
         <p>
           Species:
-          <span>{props.species}</span>
+          <span>{species}</span>
         </p>
         <p>
           Gender:
-          <span>{props.gender}</span>
+          <span>{gender}</span>
         </p>
       </div>
     </div>

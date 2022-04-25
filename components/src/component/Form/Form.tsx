@@ -14,15 +14,15 @@ const Form = (props: FormSubmitProps) => {
   } = useForm();
   const [cards, setCards] = useState<TypeFormCard[]>([]);
 
-  function createNewCard(card: TypeFormCard) {
+  const createNewCard = (card: TypeFormCard) => {
     setCards([...cards, card]);
   }
 
-  function checkMarried() {
+  const checkMarried = () => {
     return getValues().married ? 'YES' : 'NO';
   }
 
-  function getFile() {
+  const getFile = () => {
     const newSrc = URL.createObjectURL(getValues().picture[0] as Blob);
     getValues().picture[0].src = newSrc;
   }

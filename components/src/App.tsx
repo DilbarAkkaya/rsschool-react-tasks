@@ -16,7 +16,7 @@ const initialState = {
   activeModal: false,
 };
 
-function reducer(state: ReduserState, action: ActionTypes) {
+const reducer = (state: ReduserState, action: ActionTypes) => {
   switch (action.type) {
     case 'enter':
       return {...state, inputSearch: action.payload};
@@ -28,18 +28,6 @@ function reducer(state: ReduserState, action: ActionTypes) {
       return state;
   }
 }
-
-
-
-/* function setItems() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  return (
-    <>
-     {state}
-      <SearchPanel  />
-          </>
-  );
-} */
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);

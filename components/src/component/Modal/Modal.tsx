@@ -13,15 +13,13 @@ interface ModalProps {
 
 const Modal = (props: ModalProps) => {
   const {state, dispatch} =useContext(Context)
-  const [open] = useState(false);
+ // const [open] = useState(false);
 
-function setOpen() {
-console.log("ok")
-
-dispatch({
-  type: 'activemodal',
-  payload: false
- })
+const setOpen = () => {
+  dispatch({
+    type: 'activemodal',
+    payload: false
+  })
 }
 
   return (

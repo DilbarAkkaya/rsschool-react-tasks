@@ -8,36 +8,30 @@ import Portal from '../component/Portal/Portal';
 import ErrorMessage from '../component/ErrorMessage/ErrorMessage';
 import Spinner from '../component/Spinner/Spinner';
 import Context from '../Context/Context';
-import { stat } from 'fs';
-
-
 
 const Main = () => {
-function handleClick(id: number) {
+  const handleClick = (id: number) => {
     const findCard = state.cards.find((el) => el.id === id) as IDataApi;
-    console.log(findCard)
-  setSelectedCard(findCard);
-  setModalActive();
-
+    setSelectedCard(findCard);
+    setModalActive();
   }
 
-  
-  function setModalActive() {
+  const setModalActive = () => {
     dispatch({
       type: 'activemodal',
       payload: true
-     })
+    })
   }
 
   const [isLoaded, setLoaded] = useState(false);
  //const [items, setItems] = useState<IDataApi[]>([]);
   const [error, setError] = useState(false);
  // const [activeModal, setActiveModal] = useState(false);
- const [selectedCard, setSelectedCard] = useState<IDataApi | null>(null);
+  const [selectedCard, setSelectedCard] = useState<IDataApi | null>(null);
   const errorMessage = error ? <ErrorMessage /> : null;
   const spinner = isLoaded ? <Spinner /> : null;
   const {state, dispatch} = useContext(Context)
- const listOfCards = (state.cards as Array<IDataApi>).map((item,i) => {
+  const listOfCards = (state.cards as Array<IDataApi>).map((item,i) => {
     return <CardApi key={item.id} {...item} handleClick={handleClick}></CardApi>;
   })
 
@@ -88,11 +82,8 @@ function handleClick(id: number) {
       </div>
       {spinner}
       <div className="card-block" id="card-block" data-testid="card">
-     {listOfCards}
+        {listOfCards}
         {errorMessage}
-{/*         <Portal>
-          <Modal active={activeModal} setActive={setModalActive} selectedCard={selectedCard} />
-        </Portal> */}
          <Portal>
           <Modal activeModal={state.activeModal} setActive={setModalActive} selectedCard={selectedCard}/>
         </Portal> 
