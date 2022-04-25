@@ -92,3 +92,8 @@ export interface IDataApi {
 export type SelectedProps = {
   handleClick: (id: number | null) => void;
 }
+
+export type ApiTypes = {
+  info: {},
+  results: IDataApi[],
+}

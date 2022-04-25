@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEventHandler, ReactEventHandler, useContext, useEffect, useRef, useState } from 'react';
 import Context from '../../Context/Context';
-import { MyProps } from '../../types';
+import { ApiTypes, MyProps } from '../../types';
 import searchData from '../../utils';
 import Form from '../Form/Form';
 import './search.css';
@@ -17,8 +17,8 @@ const SearchPanel = () => {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     searchData('character')
-      .then((res) => {
-        (res.results).forEach((item: any) => {
+      .then((res: ApiTypes) => {
+        (res.results).forEach((item) => {
           if (
             item.name
               .toLowerCase()
