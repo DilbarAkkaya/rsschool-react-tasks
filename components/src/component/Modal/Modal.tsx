@@ -14,12 +14,13 @@ interface ModalProps {
 const Modal = React.memo((props: ModalProps) => {
   const {state, dispatch} =useContext(Context);
   const setClass = state.activeModal ? 'modal active' : 'modal';
- // const [open] = useState(false);
+  const { name, image, status, gender, type, species, location, episode, origin } =
+   (props.selectedCard as IDataApi) || {};
 
 const setOpen = () => {
   dispatch({
     type: 'activemodal',
-    payload: false
+    payload: false,
   })
 }
 
@@ -27,39 +28,39 @@ const setOpen = () => {
     <div className={setClass} onClick={setOpen}>
       <FontAwesomeIcon icon={faXmark} className="modal__close-button" onClick={setOpen} />
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
-        <h2>{props.selectedCard?.name}</h2>
-        <img src={props.selectedCard?.image} alt="toy" className="card-img" />
+        <h2>{name}</h2>
+        <img src={image} alt="toy" className="card-img" />
         <div className="card-descr">
           <p>
             Status:
-            <span>{props.selectedCard?.status}</span>
+            <span>{status}</span>
           </p>
           <p>
             Species:
-            <span>{props.selectedCard?.species}</span>
+            <span>{species}</span>
           </p>
           <p>
             Type:
-            <span>{props.selectedCard?.type}</span>
+            <span>{type}</span>
           </p>
           <p>
             Gender:
-            <span>{props.selectedCard?.gender}</span>
+            <span>{gender}</span>
           </p>
           <ul>
             Origin:
-            <li>{props.selectedCard?.origin.name}</li>
-            <li>{props.selectedCard?.origin.url}</li>
+            <li>{origin?.name}</li>
+            <li>{origin?.url}</li>
           </ul>
           <ul>
             Episode:
-            <li>{props.selectedCard?.episode[0]}</li>
-            <li>{props.selectedCard?.episode[1]}</li>
+            <li>{episode?.filter((_, i: number) => i === 0)}</li>
+            <li>{episode?.filter((_, i: number) => i === 1)}</li>
           </ul>
           <ul>
             Location:
-            <li>{props.selectedCard?.location.name}</li>
-            <li>{props.selectedCard?.location.url}</li>
+            <li>{location?.name}</li>
+            <li>{location?.url}</li>
           </ul>
         </div>
       </div>
