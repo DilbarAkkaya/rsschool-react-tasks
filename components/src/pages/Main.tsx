@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import SearchPanel from '../component/Search/SearchPanel';
 import CardApi from '../component/Card/CardApi';
 import Modal from '../component/Modal/Modal';
@@ -24,14 +24,14 @@ const Main = () => {
   }
 
   const [isLoaded, setLoaded] = useState(false);
- //const [items, setItems] = useState<IDataApi[]>([]);
+  //const [items, setItems] = useState<IDataApi[]>([]);
   const [error, setError] = useState(false);
- // const [activeModal, setActiveModal] = useState(false);
+  // const [activeModal, setActiveModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState<IDataApi | null>(null);
   const errorMessage = error ? <ErrorMessage /> : null;
   const spinner = isLoaded ? <Spinner /> : null;
-  const {state, dispatch} = useContext(Context)
-  const listOfCards = (state.cards as Array<IDataApi>).map((item,i) => {
+  const { state, dispatch } = useContext(Context)
+  const listOfCards = (state.cards as Array<IDataApi>).map((item, i) => {
     return <CardApi key={item.id} {...item} handleClick={handleClick}></CardApi>;
   })
 
@@ -58,21 +58,21 @@ const Main = () => {
       })
       .catch(onError);
   } */
-/* 
-  function onError() {
-    setLoaded(false);
-    setError(true);
-  }
-
-  function setModalActive() {
-    setActiveModal(!activeModal);
-  }
-
-  function handleClick(id: number) {
-    const findCard = items?.find((el) => el.id === id) as IDataApi;
-    setSelectedCard(findCard);
-    setModalActive();
-  } */
+  /* 
+    function onError() {
+      setLoaded(false);
+      setError(true);
+    }
+  
+    function setModalActive() {
+      setActiveModal(!activeModal);
+    }
+  
+    function handleClick(id: number) {
+      const findCard = items?.find((el) => el.id === id) as IDataApi;
+      setSelectedCard(findCard);
+      setModalActive();
+    } */
 
   return (
     <div className="main">
@@ -84,9 +84,9 @@ const Main = () => {
       <div className="card-block" id="card-block" data-testid="card">
         {listOfCards}
         {errorMessage}
-         <Portal>
-          <Modal activeModal={state.activeModal} setActive={setModalActive} selectedCard={selectedCard}/>
-        </Portal> 
+        <Portal>
+          <Modal activeModal={state.activeModal} setActive={setModalActive} selectedCard={selectedCard} />
+        </Portal>
       </div>
     </div>
   );

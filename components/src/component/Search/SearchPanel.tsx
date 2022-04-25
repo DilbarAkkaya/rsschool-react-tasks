@@ -7,15 +7,13 @@ import './search.css';
 
 const SearchPanel = () => {
   const { state, dispatch } = useContext(Context)
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: 'enter',
       payload: event.target.value
     })
   }
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
+  const getAllItems = () => {
     searchData('character')
       .then((res: ApiTypes) => {
         (res.results).forEach((item) => {
@@ -24,25 +22,29 @@ const SearchPanel = () => {
               .toLowerCase()
               .trim()
               .includes(`${state.inputSearch.toLowerCase()}`)
-          )
+          ) {
             dispatch({
               type: 'addcards',
               payload: item
             })
+          }
         })
       })
-    }
-        return (
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              className="search-input"
-              placeholder="Search..."
-              value={state.inputSearch}
-              onChange={handleChange}
-            />
-          </form>
-
-        );
-      }
-    export default SearchPanel;
+  }
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    getAllItems()
+  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        className="search-input"
+        placeholder="Search..."
+        value={state.inputSearch}
+        onChange={handleChange}
+      />
+    </form>
+  );
+}
+export default SearchPanel;

@@ -4,7 +4,7 @@ import FormCard from './FormCard';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import './form.css';
 
-const Form = (props: FormSubmitProps) => {
+const Form = () => {
   const {
     register,
     handleSubmit,
