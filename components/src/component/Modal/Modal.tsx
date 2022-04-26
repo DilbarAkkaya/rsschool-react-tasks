@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { IDataApi } from '../../types';
@@ -12,17 +12,17 @@ interface ModalProps {
 }
 
 const Modal = React.memo((props: ModalProps) => {
-  const {state, dispatch} =useContext(Context);
+  const { state, dispatch } = useContext(Context);
   const setClass = state.activeModal ? 'modal active' : 'modal';
   const { name, image, status, gender, type, species, location, episode, origin } =
-   (props.selectedCard as IDataApi) || {};
+    (props.selectedCard as IDataApi) || {};
 
-const setOpen = () => {
-  dispatch({
-    type: 'activemodal',
-    payload: false,
-  })
-}
+  const setOpen = () => {
+    dispatch({
+      type: 'activemodal',
+      payload: false,
+    });
+  };
 
   return (
     <div className={setClass} onClick={setOpen}>

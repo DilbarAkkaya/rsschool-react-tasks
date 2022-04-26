@@ -1,40 +1,33 @@
-import React, { ChangeEvent, FormEventHandler, ReactEventHandler, useContext, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useContext } from 'react';
 import Context from '../../Context/Context';
-import { ApiTypes, MyProps } from '../../types';
+import { ApiTypes } from '../../types';
 import searchData from '../../utils';
-import Form from '../Form/Form';
 import './search.css';
 
 const SearchPanel = () => {
-  const { state, dispatch } = useContext(Context)
+  const { state, dispatch } = useContext(Context);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: 'enter',
-      payload: event.target.value
-    })
-  }
+      payload: event.target.value,
+    });
+  };
   const getAllItems = () => {
-    searchData('character')
-      .then((res: ApiTypes) => {
-        (res.results).forEach((item) => {
-          if (
-            item.name
-              .toLowerCase()
-              .trim()
-              .includes(`${state.inputSearch.toLowerCase()}`)
-          ) {
-            dispatch({
-              type: 'addcards',
-              payload: item
-            })
-          }
-        })
-      })
-  }
+    searchData('character').then((res: ApiTypes) => {
+      res.results.forEach((item) => {
+        if (item.name.toLowerCase().trim().includes(`${state.inputSearch.toLowerCase()}`)) {
+          dispatch({
+            type: 'addcards',
+            payload: item,
+          });
+        }
+      });
+    });
+  };
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    getAllItems()
-  }
+    getAllItems();
+  };
   return (
     <form onSubmit={handleSubmit}>
       <input
@@ -46,5 +39,5 @@ const SearchPanel = () => {
       />
     </form>
   );
-}
+};
 export default SearchPanel;

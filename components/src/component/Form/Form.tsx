@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormSubmitProps, TypeFormCard } from '../../types';
+import { TypeFormCard } from '../../types';
 import FormCard from './FormCard';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import './form.css';
@@ -16,16 +16,16 @@ const Form = () => {
 
   const createNewCard = (card: TypeFormCard) => {
     setCards([...cards, card]);
-  }
+  };
 
   const checkMarried = () => {
     return getValues().married ? 'YES' : 'NO';
-  }
+  };
 
   const getFile = () => {
     const newSrc = URL.createObjectURL(getValues().picture[0] as Blob);
     getValues().picture[0].src = newSrc;
-  }
+  };
 
   const onSubmit: SubmitHandler<TypeFormCard> = (data, event?: React.BaseSyntheticEvent) => {
     event?.preventDefault();
