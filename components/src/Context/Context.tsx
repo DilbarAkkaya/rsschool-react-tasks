@@ -1,5 +1,5 @@
 import React from 'react';
-import { IDataApi } from '../types';
+import { IDataApi, TypeFormCard } from '../types';
 export type Context = {
   state: ReduserState;
   dispatch: React.Dispatch<ActionTypes>;
@@ -9,6 +9,7 @@ export type ReduserState = {
   inputSearch: string;
   cards: IDataApi[];
   activeModal: boolean;
+  formCard: TypeFormCard[];
 };
 
 export type ActionTypes =
@@ -23,6 +24,10 @@ export type ActionTypes =
   | {
       type: 'activemodal';
       payload: boolean;
+    }
+  |  {
+      type: 'addform';
+      payload: TypeFormCard;
     };
 
 const Context = React.createContext<Context>({
@@ -30,6 +35,7 @@ const Context = React.createContext<Context>({
     inputSearch: '',
     cards: [],
     activeModal: false,
+    formCard: [],
   },
   dispatch: () => {},
 });

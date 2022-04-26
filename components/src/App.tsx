@@ -13,6 +13,7 @@ const initialState = {
   inputSearch: '',
   cards: [],
   activeModal: false,
+  formCard: []
 };
 
 const reducer = (state: ReduserState, action: ActionTypes) => {
@@ -23,6 +24,8 @@ const reducer = (state: ReduserState, action: ActionTypes) => {
       return { ...state, cards: [...state.cards, action.payload] };
     case 'activemodal':
       return { ...state, activeModal: action.payload };
+      case 'addform':
+      return { ...state, formCard: [...state.formCard, action.payload] };
     default:
       return state;
   }
