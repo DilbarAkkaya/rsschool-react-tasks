@@ -25,7 +25,7 @@ export type ActionTypes =
       type: 'activemodal';
       payload: boolean;
     }
-  |  {
+  | {
       type: 'addform';
       payload: TypeFormCard;
     };

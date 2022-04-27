@@ -25,10 +25,8 @@ const Main = () => {
     [state.cards, setModalActive]
   );
 
-  const [isLoaded, setLoaded] = useState(false);
-  //const [items, setItems] = useState<IDataApi[]>([]);
-  const [error, setError] = useState(false);
-  // const [activeModal, setActiveModal] = useState(false);
+  const [isLoaded] = useState(false);
+  const [error] = useState(false);
   const [selectedCard, setSelectedCard] = useState<IDataApi | null>(null);
   const errorMessage = error ? <ErrorMessage /> : null;
   const spinner = isLoaded ? <Spinner /> : null;
@@ -36,45 +34,6 @@ const Main = () => {
   const listOfCards = (state.cards as Array<IDataApi>).map((item) => {
     return <CardApi key={item.id} {...item} handleClick={handleClick}></CardApi>;
   });
-
-  /* async function getAllItems() {
-    await searchData('character')
-      .then((res) => {
-        setLoaded(true);
-        const dataResults: IDataApi[] = res.results;
-        let findData: IDataApi[] = [];
-        setTimeout(() => {
-          dataResults.forEach((item) => {
-            if (
-              item.name
-                .toLowerCase()
-                .trim()
-                .includes(`${localStorage.getItem('searchItem')?.toLowerCase()}`)
-            ) {
-              findData = [...findData, item];
-            }
-            setItems(findData);
-            setLoaded(false);
-          });
-        }, 1000);
-      })
-      .catch(onError);
-  } */
-  /* 
-    function onError() {
-      setLoaded(false);
-      setError(true);
-    }
-  
-    function setModalActive() {
-      setActiveModal(!activeModal);
-    }
-  
-    function handleClick(id: number) {
-      const findCard = items?.find((el) => el.id === id) as IDataApi;
-      setSelectedCard(findCard);
-      setModalActive();
-    } */
 
   return (
     <div className="main">
