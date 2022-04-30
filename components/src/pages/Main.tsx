@@ -6,24 +6,24 @@ import { IDataApi } from '../types';
 import Portal from '../component/Portal/Portal';
 import ErrorMessage from '../component/ErrorMessage/ErrorMessage';
 import Spinner from '../component/Spinner/Spinner';
-import Context from '../Context/Context';
+import { useSelector } from 'react-redux';
 
 const Main = () => {
-  const { state, dispatch } = useContext(Context);
-  const setModalActive = useCallback(() => {
+  const searchCards = useSelector((state) => (state as any).add.cards);
+/*  const setModalActive = useCallback(() => {
     dispatch({
       type: 'activemodal',
       payload: true,
     });
-  }, [dispatch]);
+  }, [dispatch]); */
   const handleClick = useCallback(
     (id: number) => {
-      const findCard = state.cards.find((el) => el.id === id) as IDataApi;
+      const findCard = searchCards.find((el: any) => el.id === id) as IDataApi;
       setSelectedCard(findCard);
-      setModalActive();
+     // setModalActive();
     },
-    [state.cards, setModalActive]
-  );
+    [searchCards]
+  ); 
 
   const [isLoaded] = useState(false);
   const [error] = useState(false);
@@ -31,7 +31,7 @@ const Main = () => {
   const errorMessage = error ? <ErrorMessage /> : null;
   const spinner = isLoaded ? <Spinner /> : null;
 
-  const listOfCards = (state.cards as Array<IDataApi>).map((item) => {
+  const listOfCards = (searchCards as Array<IDataApi>).map((item) => {
     return <CardApi key={item.id} {...item} handleClick={handleClick}></CardApi>;
   });
 
@@ -47,9 +47,9 @@ const Main = () => {
         {errorMessage}
         <Portal>
           <Modal
-            activeModal={state.activeModal}
+   /*          activeModal={state.activeModal}
             setActive={setModalActive}
-            selectedCard={selectedCard}
+            selectedCard={selectedCard} */
           />
         </Portal>
       </div>
