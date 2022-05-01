@@ -4,5 +4,5 @@ export const PATH = {
   _404: '/404',
   OTHER: '*',
   FORM: '/form',
-  _URL: 'https://rickandmortyapi.com/api/',
+  _URL: 'https://rickandmortyapi.com/api/character',
 };

@@ -1,24 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { iteratorSymbol } from "immer/dist/internal";
+import CardApi from "../component/Card/CardApi";
 import { IDataApi } from "../types";
 
-export type reducState = {
-  inputSearch: string;
-  cards: IDataApi[];
-//  activeModal: boolean;
-//  formCard: TypeFormCard[];
-};
+type cardArray = {
+  cards: IDataApi[]
+}
 
+const initialState: cardArray = {
+  cards: [],
+}
 const cardSlice = createSlice({
   name: 'cards',
-  initialState: {
-    cards: [],
-  },
+  initialState,
   reducers: {
-    addCards: (state, action) => {
-      console.log(action)
-    state.cards.push(action.payload)
-    }
+    addCards: (state, action: PayloadAction<IDataApi>) => {
+    state.cards = [...state.cards, action.payload]
   }
+}
 
 })
 

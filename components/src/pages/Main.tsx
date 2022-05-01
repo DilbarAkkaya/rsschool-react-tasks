@@ -6,10 +6,13 @@ import { IDataApi } from '../types';
 import Portal from '../component/Portal/Portal';
 import ErrorMessage from '../component/ErrorMessage/ErrorMessage';
 import Spinner from '../component/Spinner/Spinner';
-import { useSelector } from 'react-redux';
+import { useSelector} from 'react-redux';
+import { RootState } from '../store/store';
 
 const Main = () => {
-  const searchCards = useSelector((state) => (state as any).add.cards);
+  const searchCards = useSelector((state: RootState) => state.add.cards);
+  const valueSearchInput = useSelector((state) => (state as any).search.inputSearch);
+  const clearedInput = useSelector((state) => (state as any).clear.isClear)
 /*  const setModalActive = useCallback(() => {
     dispatch({
       type: 'activemodal',
@@ -31,8 +34,8 @@ const Main = () => {
   const errorMessage = error ? <ErrorMessage /> : null;
   const spinner = isLoaded ? <Spinner /> : null;
 
-  const listOfCards = (searchCards as Array<IDataApi>).map((item) => {
-    return <CardApi key={item.id} {...item} handleClick={handleClick}></CardApi>;
+  const listOfCards = (searchCards as Array<IDataApi>).filter((item) => item.name.toLowerCase().trim().includes(`${valueSearchInput.toLowerCase()}`)).map((item, index) => {
+    return <CardApi key={index} {...item} handleClick={handleClick}></CardApi>;
   });
 
   return (

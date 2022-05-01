@@ -9,7 +9,7 @@ import { useReducer } from 'react';
 import './App.css';
 import Context, { ActionTypes, ReduserState } from './Context/Context';
 
-const initialState = {
+/* const initialState = {
   inputSearch: '',
   cards: [],
   activeModal: false,
@@ -29,13 +29,13 @@ const reducer = (state: ReduserState, action: ActionTypes) => {
     default:
       return state;
   }
-};
+}; */
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  //const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <Context.Provider value={{ state, dispatch }}>
+   // <Context.Provider value={{ state, dispatch }}>
       <div className="App">
         <Header />
         <Routes>
@@ -46,7 +46,7 @@ function App() {
           <Route path={PATH.OTHER} element={<NotFound />} />
         </Routes>
       </div>
-    </Context.Provider>
+  //  </Context.Provider>
   );
 }
 

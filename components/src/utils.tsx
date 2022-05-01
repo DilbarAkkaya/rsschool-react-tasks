@@ -9,6 +9,6 @@ export async function getData(url: string) {
   return await res.json();
 }
 
-export default function searchData(param: string) {
-  return getData(`${PATH._URL}${param}`);
+export default function searchData() {
+  return getData(`${PATH._URL}`);
 }
