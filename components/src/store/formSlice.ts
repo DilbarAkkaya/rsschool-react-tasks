@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IDataApi } from "../types";
+import { IDataApi, TypeFormCard } from "../types";
 
 type cardArray = {
-  formCards: IDataApi[]
+  formCards: TypeFormCard[]
 }
 
 const initialState: cardArray = {
@@ -12,7 +12,7 @@ const formSlice = createSlice({
   name: 'formcards',
   initialState,
   reducers: {
-    setformCards: (state, action: PayloadAction<IDataApi>) => {
+    setformCards: (state, action: PayloadAction<TypeFormCard>) => {
     state.formCards = [...state.formCards, action.payload]
   }
 }

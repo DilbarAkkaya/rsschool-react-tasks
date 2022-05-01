@@ -3,13 +3,15 @@ import { TypeFormCard } from '../../types';
 import FormCard from './FormCard';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Context from '../../Context/Context';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/store';
 import './form.css';
+import { setformCards } from '../../store/formSlice';
 
 const Form = () => {
   //const { state, dispatch } = useContext(Context);
-  const 
+  const formState = useSelector((state: RootState) => state.setform.formCards);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -19,7 +21,8 @@ const Form = () => {
   } = useForm();
 
   const createNewCard = (formCard: TypeFormCard) => {
-    dispatch({ type: 'addform', payload: formCard });
+   // dispatch({ type: 'addform', payload: formCard });
+   dispatch(setformCards(formCard))
   };
 
   const checkMarried = () => {
@@ -145,7 +148,7 @@ const Form = () => {
         </button>
       </form>
       <div className="wrapper">
-        {(state.formCard as Array<TypeFormCard>).map((item, i: number) => (
+        {(formState as Array<TypeFormCard>).map((item, i: number) => (
           <FormCard key={i} {...item} />
         ))}
       </div>

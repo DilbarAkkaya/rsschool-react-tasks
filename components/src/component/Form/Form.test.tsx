@@ -2,11 +2,18 @@ import Form from "./Form";
 import { fireEvent, screen, render } from '@testing-library/react';
 import { act } from "react-dom/test-utils";
 import userEvent from "@testing-library/user-event";
+import { Provider } from "react-redux";
+import { store } from "../../store/store";
 
 describe('Form', () => {
   describe("with valid inputs of form", () => {
     it('calls', async () => {
-      const { getByLabelText, getByRole } = render(<Form />)
+      const { getByLabelText, getByRole } = render(
+        <Provider store={store}>
+          <Form />
+        </Provider>
+      )
+
       const file = new File(['(ia)'], 'spanchbob.png', { type: 'image/png' });
       await act(async () => {
         fireEvent.change(getByLabelText("Name of employer:"), { target: { value: "Fio" } })
@@ -52,7 +59,10 @@ describe('Form', () => {
 describe("Form submit button", () => {
   it("should have a submit button", async () => {
     await act(async () => {
-      render(<Form />)
+      render(
+      <Provider store={store}>
+        <Form />
+      </Provider>)
     });
     expect(screen.getByText("Submit")).toBeInTheDocument();
   });
