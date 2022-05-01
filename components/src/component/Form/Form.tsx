@@ -3,10 +3,13 @@ import { TypeFormCard } from '../../types';
 import FormCard from './FormCard';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Context from '../../Context/Context';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 import './form.css';
 
 const Form = () => {
-  const { state, dispatch } = useContext(Context);
+  //const { state, dispatch } = useContext(Context);
+  const 
   const {
     register,
     handleSubmit,
