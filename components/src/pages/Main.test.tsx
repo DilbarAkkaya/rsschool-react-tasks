@@ -1,16 +1,20 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from '../App';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 import axios from 'axios';
 import userEvent from '@testing-library/user-event';
-import Main from '../pages/Main'
+import Main from '../pages/Main';
+import {Provider } from 'react-redux';
+import {store} from '../store/store';
 
 test('Main page', () => {
   render(
-    <BrowserRouter>
+    <Provider store={store}>
+    <HashRouter>
       <App />
-    </BrowserRouter>);
+    </HashRouter>
+  </Provider>,)
     
   const linkElement = screen.getByText(/Main page/i);
   expect(linkElement).toBeInTheDocument();

@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import CardApi from "../component/Card/CardApi";
 import { IDataApi } from "../types";
 
 type cardArray = {

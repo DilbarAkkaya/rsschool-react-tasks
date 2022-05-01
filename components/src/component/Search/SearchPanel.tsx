@@ -1,14 +1,11 @@
-import React, { ChangeEvent, useContext } from 'react';
-import Context from '../../Context/Context';
-import { ApiTypes, IDataApi } from '../../types';
+import React, { ChangeEvent } from 'react';
+import { ApiTypes } from '../../types';
 import searchData from '../../utils';
 import { useDispatch } from 'react-redux';
 import './search.css';
 import { setSearchName } from '../../store/searchSlice';
 import { addCards } from '../../store/cardSlice';
 import { useSelector } from 'react-redux';
-import { clear } from 'console';
-import { setActive } from '../../store/modalSlice';
 import { RootState } from '../../store/store';
 
 const SearchPanel = () => {

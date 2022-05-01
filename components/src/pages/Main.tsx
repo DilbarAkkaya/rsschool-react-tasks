@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useState } from 'react';
 import SearchPanel from '../component/Search/SearchPanel';
 import CardApi from '../component/Card/CardApi';
 import Modal from '../component/Modal/Modal';
@@ -17,7 +17,7 @@ const Main = () => {
   const dispatch = useDispatch();
 const setModalActive = useCallback(() => {
   dispatch(setActive(true))
-  },[]);
+  },[dispatch]);
   const handleClick = useCallback(
     (id: number) => {
       const findCard = searchCards.find((el) => el.id === id) as IDataApi;

@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { IDataApi } from '../../types';
-import Context from '../../Context/Context';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/store';
-import './Modal.css';
 import { setActive } from '../../store/modalSlice';
+import './Modal.css';
 
 interface ModalProps {
   activeModal?: boolean;
@@ -17,7 +16,6 @@ interface ModalProps {
 const Modal = React.memo((props: ModalProps) => {
   const clearedInput = useSelector((state: RootState) => state.active.isActive);
   const dispatch = useDispatch();
-  //const { state, dispatch } = useContext(Context);
   const setClass = clearedInput ? 'modal active' : 'modal';
   const { name, image, status, gender, type, species, location, episode, origin } =
     (props.selectedCard as IDataApi) || {};

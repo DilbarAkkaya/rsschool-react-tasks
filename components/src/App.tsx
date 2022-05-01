@@ -5,9 +5,7 @@ import AboutUs from './pages/AboutUs';
 import NotFound from './pages/404';
 import Form from './pages/Form';
 import { PATH } from './constants/constants';
-import { useReducer } from 'react';
 import './App.css';
-import Context, { ActionTypes, ReduserState } from './Context/Context';
 
 /* const initialState = {
   inputSearch: '',
