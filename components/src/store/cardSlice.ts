@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { iteratorSymbol } from "immer/dist/internal";
 import CardApi from "../component/Card/CardApi";
 import { IDataApi } from "../types";
 
@@ -16,6 +15,7 @@ const cardSlice = createSlice({
   reducers: {
     addCards: (state, action: PayloadAction<IDataApi>) => {
     state.cards = [...state.cards, action.payload]
+    //state.cards = state.cards.filter(char => char.name == valueSearchInput)
   }
 }
 

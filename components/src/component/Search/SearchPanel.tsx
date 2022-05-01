@@ -8,19 +8,23 @@ import { setSearchName } from '../../store/searchSlice';
 import { addCards } from '../../store/cardSlice';
 import { useSelector } from 'react-redux';
 import { clear } from 'console';
-import { setClear } from '../../store/clearSlice';
+import { setActive } from '../../store/modalSlice';
+import { RootState } from '../../store/store';
 
 const SearchPanel = () => {
-  const valueSearchInput = useSelector((state) => (state as any).search.inputSearch);
-  const searchCards = useSelector((state) => (state as any).add.cards);
-  const clearedInput = useSelector((state) => (state as any).clear.isClear)
+  const valueSearchInput = useSelector((state: RootState) => state.search.inputSearch);
+  const searchCards = useSelector((state: RootState) => state.add.cards);
+  const clearedInput = useSelector((state: RootState) => state.active.isActive);
   const dispatch = useDispatch();
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearchName(event.target.value))
+
   };
   const getFilteredItems = () => {
     searchData().then((res: ApiTypes) => {
       res.results.forEach((item) => {
+
           dispatch(addCards(item))
     //   return item.name.toLowerCase().trim().includes(`${valueSearchInput.toLowerCase()}`)
       });

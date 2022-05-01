@@ -6,24 +6,24 @@ import { IDataApi } from '../types';
 import Portal from '../component/Portal/Portal';
 import ErrorMessage from '../component/ErrorMessage/ErrorMessage';
 import Spinner from '../component/Spinner/Spinner';
-import { useSelector} from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 import { RootState } from '../store/store';
+import { setActive } from '../store/modalSlice';
 
 const Main = () => {
   const searchCards = useSelector((state: RootState) => state.add.cards);
-  const valueSearchInput = useSelector((state) => (state as any).search.inputSearch);
-  const clearedInput = useSelector((state) => (state as any).clear.isClear)
-/*  const setModalActive = useCallback(() => {
-    dispatch({
-      type: 'activemodal',
-      payload: true,
-    });
-  }, [dispatch]); */
+  const valueSearchInput = useSelector((state: RootState) => state.search.inputSearch);
+  const activeModal = useSelector((state: RootState) => state.active.isActive);
+  const dispatch = useDispatch();
+const setModalActive = useCallback(() => {
+  dispatch(setActive(true))
+  },[]);
   const handleClick = useCallback(
     (id: number) => {
-      const findCard = searchCards.find((el: any) => el.id === id) as IDataApi;
+      const findCard = searchCards.find((el) => el.id === id) as IDataApi;
       setSelectedCard(findCard);
-     // setModalActive();
+      console.log(findCard)
+     setModalActive();
     },
     [searchCards]
   ); 
@@ -50,9 +50,9 @@ const Main = () => {
         {errorMessage}
         <Portal>
           <Modal
-   /*          activeModal={state.activeModal}
+         activeModal={activeModal}
             setActive={setModalActive}
-            selectedCard={selectedCard} */
+            selectedCard={selectedCard} 
           />
         </Portal>
       </div>

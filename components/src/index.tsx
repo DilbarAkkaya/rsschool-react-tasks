@@ -8,11 +8,11 @@ import { Provider } from 'react-redux';
 import './index.css';
 
 ReactDOM.render(
-  <HashRouter>
-    <Provider store={store}>
+  <Provider store={store}>
+    <HashRouter>
       <App />
-    </Provider>
-  </HashRouter>,
+    </HashRouter>
+  </Provider>,
   document.getElementById('root')
 );
 
