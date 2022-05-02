@@ -21,7 +21,7 @@ const Modal = React.memo((props: ModalProps) => {
     (props.selectedCard as IDataApi) || {};
 
   const setOpen = () => {
-    dispatch(setActive(false))
+    dispatch(setActive(false));
   };
 
   return (

@@ -1,15 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { TypeFormCard } from '../../types';
 import FormCard from './FormCard';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import Context from '../../Context/Context';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/store';
-import './form.css';
 import { setformCards } from '../../store/formSlice';
+import './form.css';
 
 const Form = () => {
-  //const { state, dispatch } = useContext(Context);
   const formState = useSelector((state: RootState) => state.setform.formCards);
   const dispatch = useDispatch();
   const {
@@ -21,8 +19,7 @@ const Form = () => {
   } = useForm();
 
   const createNewCard = (formCard: TypeFormCard) => {
-   // dispatch({ type: 'addform', payload: formCard });
-   dispatch(setformCards(formCard))
+    dispatch(setformCards(formCard));
   };
 
   const checkMarried = () => {
